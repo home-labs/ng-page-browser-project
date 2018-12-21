@@ -1,0 +1,36 @@
+<nav>
+  <a
+    *ngIf="!isOnFrontPage()"
+    (click)="navigateTo(1)"
+    class="first-page-nav"
+  >
+    {{ firstPageLabel }}
+  </a>
+  <a
+    *ngIf="!isOnFrontPage()"
+    (click)="navigateTo(getPreviousPage())"
+    class="prev-page-nav"
+  >
+    {{ previousPageLabel }}
+  </a>
+
+  <span
+    class="current-page-number"
+  >
+    {{ currentPageNumber }}
+  </span>
+  <a
+    *ngIf="!isOnLastPage()"
+    (click)="navigateTo(getNextPage())"
+    class="next-page-nav"
+  >
+    {{ nextPageLabel }}
+  </a>
+  <a
+    *ngIf="!isOnLastPage()"
+    (click)="navigateTo(totalPages)"
+    class="last-page-nav"
+  >
+    {{ lastPageLabel }}
+  </a>
+</nav>

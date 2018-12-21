@@ -1,0 +1,1 @@
+export { NgPageNavigatorModule } from './module';

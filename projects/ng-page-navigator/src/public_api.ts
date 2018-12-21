@@ -1,7 +1,4 @@
-/*
- * Public API Surface of ng-page-navigator
- */
+// import * as NgPageNavigator from './lib';
+// export { NgPageNavigator };
 
-export * from './lib/ng-page-navigator.service';
-export * from './lib/ng-page-navigator.component';
-export * from './lib/ng-page-navigator.module';
+export { NgPageNavigatorModule } from './lib';
