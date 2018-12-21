@@ -116,6 +116,46 @@
           }
         }
       }
+    },
+    "ng-page-navigator": {
+      "root": "projects/ng-page-navigator",
+      "sourceRoot": "projects/ng-page-navigator/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-page-navigator/tsconfig.lib.json",
+            "project": "projects/ng-page-navigator/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ng-page-navigator/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-page-navigator/src/test.ts",
+            "tsConfig": "projects/ng-page-navigator/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-page-navigator/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-page-navigator/tsconfig.lib.json",
+              "projects/ng-page-navigator/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-page-navigator-project"

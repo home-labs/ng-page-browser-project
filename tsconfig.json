@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-page-navigator": [
+        "dist/ng-page-navigator"
+      ],
+      "ng-page-navigator/*": [
+        "dist/ng-page-navigator/*"
+      ]
+    }
   }
 }
