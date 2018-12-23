@@ -34,7 +34,7 @@ export class MyModule() { }
     nextPage: '>>',
     lastPage: '>>|'
   }"
-  (onChangePage)="methodOfYourComponent($event)"
+  (onChangePage)="methodToPageOfYourComponent($event)"
 ></page-navigator>
 ```
 
