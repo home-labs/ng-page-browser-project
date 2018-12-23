@@ -29,12 +29,14 @@ export class MyModule() { }
 <page-navigator
   [totalPages]=10
   [labelTranslations]="{
-    firstPage: '|<<',
+    firstPage: '⏮',
     previousPage: '<<',
     nextPage: '>>',
-    lastPage: '>>|'
+    lastPage: '⏭'
   }"
-  (onChangePage)="methodToPageOfYourComponent($event)"
+  (changePage)="methodToPageOfYourComponent($event)"
 ></page-navigator>
 ```
+
+**Note.**: you can browse to a specific page, just type the page number at page number box and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current).
 
