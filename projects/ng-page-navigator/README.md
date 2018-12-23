@@ -38,5 +38,5 @@ export class MyModule() { }
 ></page-navigator>
 ```
 
-**Note.**: you can browse to a specific page, just type the page number at page number box and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current).
+**Note.**: you can browse to a specific page, just type the page number at page number box (input type text) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current).
 
