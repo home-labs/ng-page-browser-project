@@ -24,7 +24,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     @Input() queryParamPropertyName: string;
     @Input() labelTranslations: Object;
 
-    @Output() onChangePage: EventEmitter<number>;
+    @Output() changePage: EventEmitter<number>;
 
     currentPageNumber: number = 1;
 
@@ -39,7 +39,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.onChangePage = new EventEmitter();
+        this.changePage = new EventEmitter();
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             (params: Object) => {
                 if (params.hasOwnProperty(this.queryParamPropertyName)) {
                     this.currentPageNumber = Number.parseInt(params[this.queryParamPropertyName]);
-                    this.onChangePage.emit(this.currentPageNumber);
+                    this.changePage.emit(this.currentPageNumber);
                 }
             }
         );
@@ -90,7 +90,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
                 }
             );
         } else {
-            this.onChangePage.emit(pageNumber);
+            this.changePage.emit(pageNumber);
         }
     }
 

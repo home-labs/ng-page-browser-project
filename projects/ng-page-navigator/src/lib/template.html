@@ -14,11 +14,11 @@
     {{ previousPageLabel }}
   </a>
 
-  <span
+  <input
+    type="text"
     class="current-page-number"
-  >
-    {{ currentPageNumber }}
-  </span>
+    [(ngModel)]="currentPageNumber"
+  />
   <a
     *ngIf="!isOnLastPage()"
     (click)="navigateTo(getNextPage())"

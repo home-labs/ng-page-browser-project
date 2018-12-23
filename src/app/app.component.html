@@ -7,12 +7,12 @@
     <page-navigator
       [totalPages]=10
       [labelTranslations]="{
-        firstPage: '|<<',
+        firstPage: '⏮',
         previousPage: '<<',
         nextPage: '>>',
-        lastPage: '>>|'
+        lastPage: '⏭'
       }"
-      (onChangePage)="onChangePage($event)"
+      (changePage)="onChangePage($event)"
     ></page-navigator>
     <router-outlet></router-outlet>
   </section>
