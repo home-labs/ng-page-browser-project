@@ -27,6 +27,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     @Output() changePage: EventEmitter<number>;
 
     currentPageNumber: number = 1;
+    bondedPageNumber: number = 1;
 
     firstPageLabel: string;
     previousPageLabel: string;
@@ -47,7 +48,8 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         this.queryParamsSubscription = this.route.queryParams.subscribe(
             (params: Object) => {
                 if (params.hasOwnProperty(this.queryParamPropertyName)) {
-                    this.currentPageNumber = Number.parseInt(params[this.queryParamPropertyName]);
+                    this.currentPageNumber = Number
+                        .parseInt(params[this.queryParamPropertyName]);
                     this.changePage.emit(this.currentPageNumber);
                 }
             }
@@ -72,25 +74,36 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     getPreviousPage(): number {
+        if (this.bondedPageNumber != this.currentPageNumber
+            && this.bondedPageNumber < this.currentPageNumber) {
+            return this.bondedPageNumber;
+        }
+
         return this.currentPageNumber - 1;
     }
 
     getNextPage(): number {
+        if (this.bondedPageNumber != this.currentPageNumber
+            && this.bondedPageNumber > this.currentPageNumber) {
+            return this.bondedPageNumber;
+        }
+
         return this.currentPageNumber + 1;
     }
 
-    navigateTo(pageNumber: number) {
-        this.currentPageNumber = pageNumber;
+    navigateTo(pageNumber: string) {
+        this.bondedPageNumber = parseInt(pageNumber);
+        this.currentPageNumber = this.bondedPageNumber;
 
         if (this.queryParamPropertyName) {
             this.router.navigate([location.pathname],
                 {
-                    queryParams: this.getQueryParamsStatement(pageNumber),
+                    queryParams: this.getQueryParamsStatement(this.bondedPageNumber),
                     queryParamsHandling: "merge"
                 }
             );
         } else {
-            this.changePage.emit(pageNumber);
+            this.changePage.emit(this.bondedPageNumber);
         }
     }
 
@@ -112,7 +125,8 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             }
 
             if (this.labelTranslations.hasOwnProperty('previousPage')) {
-                this.previousPageLabel = this.labelTranslations['previousPage'];
+                this.previousPageLabel = this
+                    .labelTranslations['previousPage'];
             } else {
                 this.previousPageLabel = 'previous';
             }
