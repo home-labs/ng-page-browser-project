@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="totalPages > 1">
   <a
     *ngIf="!isOnFrontPage()"
     (click)="navigateTo(1)"
@@ -7,7 +7,7 @@
     {{ firstPageLabel }}
   </a>
   <a
-    *ngIf="!isOnFrontPage()"
+    *ngIf="!isOnFrontPage() && totalPages > 2"
     (click)="navigateTo(getPreviousPage())"
     class="prev-page-nav"
   >
@@ -20,7 +20,7 @@
     [(ngModel)]="bondedPageNumber"
   />
   <a
-    *ngIf="!isOnLastPage()"
+    *ngIf="!isOnLastPage() && totalPages > 2"
     (click)="navigateTo(getNextPage())"
     class="next-page-nav"
   >
