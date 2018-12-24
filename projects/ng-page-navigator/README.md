@@ -30,8 +30,8 @@ export class MyModule() { }
   [totalPages]=10
   [labelTranslations]="{
     firstPage: '⏮',
-    previousPage: '<<',
-    nextPage: '>>',
+    previousPage: '◂◂',
+    nextPage: '▸▸',
     lastPage: '⏭'
   }"
   (changePage)="methodToPageOfYourComponent($event)"
