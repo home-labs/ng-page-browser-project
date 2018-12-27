@@ -4,13 +4,16 @@ import {
     OnDestroy,
     Input,
     Output,
-    EventEmitter
+    EventEmitter,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 import {
     ActivatedRoute,
     Router
 } from '@angular/router';
 import { Subscription } from 'rxjs';
+// import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -26,6 +29,14 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     @Output() changePage: EventEmitter<number>;
 
+    private pageNumberBox: ElementRef;
+
+    // @ViewChild('pageNumberBox') pageNumberBox: ElementRef;
+
+    // @ViewChild('pageNumberBox') set content(content: ElementRef) {
+    //     this.pageNumberBox = content;
+    // }
+
     currentPageNumber: number = 1;
     bondedPageNumber: number = 1;
 
@@ -33,6 +44,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     previousPageLabel: string;
     nextPageLabel: string;
     lastPageLabel: string;
+    maxlength: number = 1;
 
     private queryParamsSubscription: Subscription;
 
@@ -41,6 +53,8 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.changePage = new EventEmitter();
+
+        console.log(this.pageNumberBox);
     }
 
     ngOnInit() {
@@ -56,6 +70,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         );
 
         this.resolveLabelTranslations();
+
+        this.maxlength = `${this.totalPages}`.length;
+
+        // this.setMaxInputValidationMessage(this.pageNumberBox);
+        // console.log(this.pageNumberBox);
     }
 
     ngOnDestroy() {
@@ -63,6 +82,17 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             && this.queryParamsSubscription instanceof Subscription) {
             this.queryParamsSubscription.unsubscribe();
         }
+    }
+
+    // submit(form: NgForm) {
+    //     form.ngSubmit.emit();
+    // }
+
+    private setMaxInputValidationMessage(input: HTMLInputElement) {
+        // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
+
+        // const
+        //     ngFrom: NgForm = input.form;
     }
 
     isOnFrontPage(): boolean {

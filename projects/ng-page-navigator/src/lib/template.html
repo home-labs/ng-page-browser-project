@@ -1,36 +1,51 @@
 <nav *ngIf="totalPages > 1">
-  <a
-    *ngIf="!isOnFrontPage()"
-    (click)="navigateTo(1)"
-    class="first-page-nav"
-  >
-    {{ firstPageLabel }}
-  </a>
-  <a
-    *ngIf="!isOnFrontPage() && totalPages > 2"
-    (click)="navigateTo(getPreviousPage())"
-    class="prev-page-nav"
-  >
-    {{ previousPageLabel }}
-  </a>
 
-  <input
-    type="text"
-    class="current-page-number"
-    [(ngModel)]="bondedPageNumber"
-  />
-  <a
-    *ngIf="!isOnLastPage() && totalPages > 2"
-    (click)="navigateTo(getNextPage())"
-    class="next-page-nav"
+  <form
+    #form="ngForm"
   >
-    {{ nextPageLabel }}
-  </a>
-  <a
-    *ngIf="!isOnLastPage()"
-    (click)="navigateTo(totalPages)"
-    class="last-page-nav"
-  >
-    {{ lastPageLabel }}
-  </a>
+    <div class="control-of-previous">
+      <a
+        class="first-page-nav"
+        *ngIf="!isOnFrontPage()"
+        (click)="navigateTo(1)"
+      >
+        {{ firstPageLabel }}
+      </a>
+      <a
+        class="prev-page-nav"
+        *ngIf="!isOnFrontPage() && totalPages > 2"
+        (click)="navigateTo(getPreviousPage())"
+      >
+        {{ previousPageLabel }}
+      </a>
+    </div>
+
+    <input
+      #pageNumberBox
+      type="text"
+      class="current-page-number"
+      [(ngModel)]="bondedPageNumber"
+      [ngModelOptions]="{standalone: true}"
+      [maxlength]="maxlength"
+    /> / <span class="total-of-pages">{{ totalPages }}</span>
+
+    <div class="control-of-next">
+      <a
+        class="next-page-nav"
+        type="submit"
+        *ngIf="!isOnLastPage() && totalPages > 2"
+        (click)="navigateTo(getNextPage())"
+      >
+        {{ nextPageLabel }}
+      </a>
+      <a
+        class="last-page-nav"
+        *ngIf="!isOnLastPage()"
+        (click)="navigateTo(totalPages)"
+      >
+        {{ lastPageLabel }}
+      </a>
+    </div>
+  </form>
+
 </nav>

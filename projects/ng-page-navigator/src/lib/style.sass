@@ -6,6 +6,11 @@ page-navigator
 
     nav
 
+      .control-of-previous,
+      .control-of-next
+        display: inline-block
+        min-width: 40px
+
       a
         cursor: pointer
         display: inline-block
@@ -20,10 +25,18 @@ page-navigator
 
       input
         &[type="text"]
-          border: none
-          text-align: center
           width: 15px
 
+        &[type="number"]
+          appearance: textfield
+          width: 15px
+
+        &[type="text"],
+        &[type="number"]
+          border: none
+          text-align: center
+
       input[type="text"],
+      input[type="number"],
       a
         vertical-align: baseline
