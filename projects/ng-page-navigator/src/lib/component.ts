@@ -5,8 +5,8 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild,
-    ElementRef
+    ElementRef,
+    // ViewChild
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -23,13 +23,14 @@ import { Subscription } from 'rxjs';
 })
 export class PageNavigatorComponent implements OnInit, OnDestroy {
 
-    @Input() totalPages: number;
     @Input() queryParamPropertyName: string;
+
+    @Input() totalPages: number;
     @Input() labelTranslations: Object;
 
     @Output() changePage: EventEmitter<number>;
 
-    private pageNumberBox: ElementRef;
+    // private pageNumberBox: ElementRef;
 
     // @ViewChild('pageNumberBox') pageNumberBox: ElementRef;
 
@@ -39,12 +40,12 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     currentPageNumber: number = 1;
     bondedPageNumber: number = 1;
+    maxlength: number = 1;
 
     firstPageLabel: string;
     previousPageLabel: string;
     nextPageLabel: string;
     lastPageLabel: string;
-    maxlength: number = 1;
 
     private queryParamsSubscription: Subscription;
 
@@ -53,8 +54,6 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.changePage = new EventEmitter();
-
-        console.log(this.pageNumberBox);
     }
 
     ngOnInit() {
@@ -121,8 +120,8 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         return this.currentPageNumber + 1;
     }
 
-    navigateTo(pageNumber: string) {
-        this.bondedPageNumber = parseInt(pageNumber);
+    navigateTo(pageNumber: number) {
+        this.bondedPageNumber = parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
 
         if (this.queryParamPropertyName) {
