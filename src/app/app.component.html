@@ -4,7 +4,7 @@
     Navigated to: {{ currentPageNumber }}
 
       <!-- [queryParamPropertyName]="'pagina'" -->
-    <page-navigator
+    <!-- <page-navigator
       [totalPages]=10
       [labelTranslations]="{
         firstPage: '⏮',
@@ -13,7 +13,16 @@
         lastPage: '⏭'
       }"
       (changePage)="onChangePage($event)"
+    ></page-navigator> -->
+    <page-navigator
+      [totalPages]=10
+      [labelTranslations]="{
+            firstPage: 'first',
+            previousPage: '◂◂',
+            nextPage: '▸▸',
+            lastPage: 'last'
+          }"
+      (changePage)="onChangePage($event)"
     ></page-navigator>
-    <router-outlet></router-outlet>
   </section>
 </main>
