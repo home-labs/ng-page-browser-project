@@ -1,11 +1,11 @@
 {
   "name": "ng-page-navigator",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "peerDependencies": {
     "@angular/common": ">=4.0.0",
     "@angular/core": ">=4.0.0",
-    "@angular/router": ">=4.0.0",
     "@angular/forms": ">=4.0.0",
+    "@angular/router": ">=4.0.0",
     "rxjs": ">=4.0.0"
   }
 }

@@ -8,18 +8,19 @@
       [totalPages]=10
       [labelTranslations]="{
         firstPage: '⏮',
-        previousPage: '◂◂',
-        nextPage: '▸▸',
+        previousPage: '⏪',
+        nextPage: '⏩',
         lastPage: '⏭'
       }"
       (changePage)="onChangePage($event)"
     ></page-navigator> -->
+
     <page-navigator
-      [totalPages]=10
+      [totalPages]=totalPages
       [labelTranslations]="{
             firstPage: 'first',
-            previousPage: '◂◂',
-            nextPage: '▸▸',
+            previousPage: '«',
+            nextPage: '»',
             lastPage: 'last'
           }"
       (changePage)="onChangePage($event)"
