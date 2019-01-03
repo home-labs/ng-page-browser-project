@@ -1,4 +1,4 @@
-# NgPageNavigator	
+# NgPageNavigator
 
 ## Requirements
 
@@ -29,14 +29,13 @@ export class MyModule() { }
 <page-navigator
   [totalPages]=10
   [labelTranslations]="{
-    firstPage: '⏮',
-    previousPage: '◂◂',
-    nextPage: '▸▸',
-    lastPage: '⏭'
+    firstPage: 'first',
+    previousPage: '«',
+    nextPage: '»',
+    lastPage: 'last'
   }"
   (changePage)="methodToPageOfYourComponent($event)"
 ></page-navigator>
 ```
 
 **Note.**: you can browse to a specific page, just type the page number at page number box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current).
-
