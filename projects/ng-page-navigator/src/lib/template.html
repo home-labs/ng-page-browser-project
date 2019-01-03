@@ -34,7 +34,6 @@
     <div class="control-of-next">
       <a
         class="next-page-nav"
-        type="submit"
         *ngIf="!isOnLastPage() && totalPages > 2"
         (click)="navigateTo(getNextPage())"
       >
