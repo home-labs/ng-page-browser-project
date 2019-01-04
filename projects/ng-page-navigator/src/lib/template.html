@@ -3,7 +3,7 @@
   <form
     #form="ngForm"
   >
-    <div class="control-of-previous">
+    <div class="left-controls">
       <a
         class="first-page-nav"
         *ngIf="!isOnFrontPage()"
@@ -18,20 +18,27 @@
       >
         {{ previousPageLabel }}
       </a>
+      <input
+        [hidden]="hiddenPageNumberInputBox"
+        #pageNumberInputBox
+        type="text"
+        class="current-page-number"
+        [maxlength]="maxlength"
+        [(ngModel)]="bondedPageNumber"
+        [ngModelOptions]="{standalone: true}"
+        (focusout)="enableCurrentPageNumberBox()"
+        (input)="resizeWidth(pageNumberInputBox)"
+        autofocus
+      />
+      <span
+      *ngIf="displayCurrentPageNumberBox"
+        class="current-page-number"
+        (click)="enablePageNumberInputBox()"
+      >{{ bondedPageNumber }}</span>
     </div>
-
-    <input
-      #pageNumberBox
-      type="text"
-      class="current-page-number"
-      [(ngModel)]="bondedPageNumber"
-      [ngModelOptions]="{standalone: true}"
-      [maxlength]="maxlength"
-    />
     /
-    <span class="total-of-pages">{{ totalPages }}</span>
-
-    <div class="control-of-next">
+    <div class="right-controls">
+      <span class="total-of-pages">{{ totalPages }}</span>
       <a
         class="next-page-nav"
         *ngIf="!isOnLastPage() && totalPages > 2"

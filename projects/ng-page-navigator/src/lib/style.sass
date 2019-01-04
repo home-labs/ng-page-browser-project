@@ -4,13 +4,20 @@ page-navigator
   &:host
     display: block
     text-align: center
+    margin: auto
 
     nav
 
       form
 
-        .control-of-previous,
-        .control-of-next
+        .left-controls,
+          text-align: right
+
+        .right-controls,
+          text-align: left
+
+        .left-controls,
+        .right-controls
           display: inline-block
 
         a
@@ -31,7 +38,9 @@ page-navigator
             padding: 0
             font-size: 15px
             background-color: transparent
+
             text-align: right
+
 
             &:focus
               outline: none

@@ -6,7 +6,7 @@ import {
     Output,
     EventEmitter,
     ElementRef,
-    // ViewChild
+    ViewChild
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -28,15 +28,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     @Input() totalPages: number;
     @Input() labelTranslations: Object;
 
+    @Input() widthGrowthFactor: number;
+
     @Output() changePage: EventEmitter<number>;
 
-    // private pageNumberBox: ElementRef;
-
-    // @ViewChild('pageNumberBox') pageNumberBox: ElementRef;
-
-    // @ViewChild('pageNumberBox') set content(content: ElementRef) {
-    //     this.pageNumberBox = content;
-    // }
+    // @ViewChild('pageNumberBox') private pageNumberBox: ElementRef;
 
     currentPageNumber: number = 1;
     bondedPageNumber: number = 1;
@@ -47,16 +43,25 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     nextPageLabel: string;
     lastPageLabel: string;
 
+    displayCurrentPageNumberBox: boolean;
+    hiddenPageNumberInputBox: boolean;
+
     private queryParamsSubscription: Subscription;
+
+    private pageNumberInputBoxLength: number;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router
     ) {
         this.changePage = new EventEmitter();
+        this.pageNumberInputBoxLength = 0;
+        this.displayCurrentPageNumberBox = true;
+        this.hiddenPageNumberInputBox = true;
     }
 
     ngOnInit() {
+        this.widthGrowthFactor = 6.78;
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(
             (params: Object) => {
@@ -70,7 +75,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
         this.resolveLabelTranslations();
 
-        this.maxlength = `${this.totalPages}`.length;
+        this.resetMaxLength();
 
         // this.setMaxInputValidationMessage(this.pageNumberBox);
         // console.log(this.pageNumberBox);
@@ -86,13 +91,6 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     // submit(form: NgForm) {
     //     form.ngSubmit.emit();
     // }
-
-    private setMaxInputValidationMessage(input: HTMLInputElement) {
-        // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
-
-        // const
-        //     ngFrom: NgForm = input.form;
-    }
 
     isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
@@ -136,6 +134,31 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         }
     }
 
+    enableCurrentPageNumberBox() {
+        this.displayCurrentPageNumberBox = true;
+        this.hiddenPageNumberInputBox = true;
+    }
+
+    enablePageNumberInputBox() {
+        this.displayCurrentPageNumberBox = false;
+        this.hiddenPageNumberInputBox = false;
+    }
+
+    resizeWidth(pageNumberInputBox: HTMLInputElement) {
+        const
+            computedStyle = window.getComputedStyle(pageNumberInputBox);
+
+        this.resetMaxLength();
+
+        // this.pageNumberInputBoxLength = pageNumberInputBox.value.length;
+        // para fazer com que diminua tem de guardar o length de value para comparar a posteriori
+        pageNumberInputBox.style.width = `${Number.parseFloat(computedStyle.width) + this.widthGrowthFactor}px`;
+    }
+
+    private resetMaxLength() {
+        this.maxlength = `${this.totalPages}`.length;
+    }
+
     private getQueryParamsStatement(pageNumber: number): Object {
         const
             statement: Object = {};
@@ -177,6 +200,13 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             this.nextPageLabel = 'next';
             this.lastPageLabel = 'last';
         }
+    }
+
+    private setMaxInputValidationMessage(input: HTMLInputElement) {
+        // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
+
+        // const
+        //     ngFrom: NgForm = input.form;
     }
 
 }

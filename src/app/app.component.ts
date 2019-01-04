@@ -13,7 +13,7 @@ export class AppComponent {
 
     constructor() {
         this.currentPageNumber = 1;
-        this.totalPages = 10;
+        this.totalPages = 11110;
     }
 
     onChangePage(pageNumber: number) {
