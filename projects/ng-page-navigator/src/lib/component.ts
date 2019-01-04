@@ -87,7 +87,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         }
     }
 
-    resolvePageNumberInput(event: KeyboardEvent) {
+    resolvePageNumberKeyInput(event: KeyboardEvent) {
         const
            eventTarget: any = event.currentTarget;
 
