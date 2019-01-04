@@ -29,6 +29,7 @@
         (blur)="enableCurrentPageNumberBox()"
         (input)="resizePageNumberInputBoxWidth(pageNumberInputBox)"
         (mouseover)="onMouseOver(pageNumberInputBox)"
+        (keypress)="resolvePageNumberInput($event)"
         autofocus
       />
       <span

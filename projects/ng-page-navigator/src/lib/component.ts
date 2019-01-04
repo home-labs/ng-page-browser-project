@@ -32,8 +32,6 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     @Output() changePage: EventEmitter<number>;
 
-    // @ViewChild('pageNumberInputBox') private pageNumberInputBox: ElementRef;
-
     currentPageNumber: number;
     bondedPageNumber: number;
     maxlength: number;
@@ -80,9 +78,6 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         this.resolveLabelTranslations();
 
         this.resetMaxLength();
-
-        // this.setMaxInputValidationMessage(this.pageNumberBox);
-        // console.log(this.pageNumberBox);
     }
 
     ngOnDestroy() {
@@ -92,9 +87,17 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         }
     }
 
-    // submit(form: NgForm) {
-    //     form.ngSubmit.emit();
-    // }
+    resolvePageNumberInput(event: KeyboardEvent) {
+        const
+           eventTarget: any = event.currentTarget;
+
+        event.preventDefault();
+
+        // to do that following a logic, as event.key should be a number and eventTarget['value'] + event.key should be smaller than or equal to totalPages
+        eventTarget['value'] += event.key;
+
+        this.resizePageNumberInputBoxWidth(eventTarget);
+    }
 
     isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
