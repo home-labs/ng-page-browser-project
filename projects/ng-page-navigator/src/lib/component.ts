@@ -93,7 +93,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
         event.preventDefault();
 
-        // to do that following a logic, as event.key should be a number and eventTarget['value'] + event.key should be smaller than or equal to totalPages
+        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
         eventTarget['value'] += event.key;
 
         this.resizePageNumberInputBoxWidth(eventTarget);
