@@ -26,8 +26,9 @@
         [maxlength]="maxlength"
         [(ngModel)]="bondedPageNumber"
         [ngModelOptions]="{standalone: true}"
-        (focusout)="enableCurrentPageNumberBox()"
-        (input)="resizeWidth(pageNumberInputBox)"
+        (blur)="enableCurrentPageNumberBox()"
+        (input)="resizePageNumberInputBoxWidth(pageNumberInputBox)"
+        (mouseover)="onMouseOver(pageNumberInputBox)"
         autofocus
       />
       <span
