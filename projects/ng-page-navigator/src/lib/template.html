@@ -32,7 +32,7 @@
         (keypress)="resolvePageNumberKeyInput($event)"
       />
       <span
-      *ngIf="displayCurrentPageNumberBox"
+        *ngIf="showCurrentPageNumberDisplay"
         class="current-page-number"
         (click)="enablePageNumberInputBox()"
       >{{ bondedPageNumber }}</span>
