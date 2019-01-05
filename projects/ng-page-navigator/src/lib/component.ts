@@ -27,10 +27,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     @Input() totalPages: number;
     @Input() labelTranslations: Object;
     @Input() widthGrowthToggleFactor: number;
+    @Input() enablePageNumberInputBox: boolean;
 
     @Output() changePage: EventEmitter<number>;
 
-    @ViewChild('pageNumberInputBox') pageNumberInputBox: ElementRef;
+    @ViewChild('pageNumberInputBox') private pageNumberInputBox: ElementRef;
 
     currentPageNumber: number;
     bondedPageNumber: number;
@@ -60,6 +61,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
+        this.enablePageNumberInputBox = this.enablePageNumberInputBox || false;
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(
             (params: Object) => {
@@ -83,7 +85,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         }
     }
 
-    resolvePageNumberKeyInput(event: KeyboardEvent) {
+    resolvePageNumberInput(event: KeyboardEvent) {
         const
            eventTarget: any = event.currentTarget;
 
@@ -156,14 +158,16 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         this.resizePageNumberInputBoxWidth();
     }
 
-    enableCurrentPageNumberDisplay() {
+    enablesCurrentPageNumberDisplay() {
         this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
     }
 
-    enablePageNumberInputBox() {
-        this.showCurrentPageNumberDisplay = false;
-        this.hiddenPageNumberInputBox = false;
+    enablesPageNumberInputBox() {
+        if (this.enablePageNumberInputBox) {
+            this.showCurrentPageNumberDisplay = false;
+            this.hiddenPageNumberInputBox = false;
+        }
     }
 
     onMouseOver() {

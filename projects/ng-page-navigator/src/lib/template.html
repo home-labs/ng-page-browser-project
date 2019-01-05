@@ -26,15 +26,15 @@
         [maxlength]="maxlength"
         [(ngModel)]="bondedPageNumber"
         [ngModelOptions]="{standalone: true}"
-        (blur)="enableCurrentPageNumberDisplay()"
+        (blur)="enablesCurrentPageNumberDisplay()"
         (input)="resizePageNumberInputBoxWidth()"
         (mouseover)="onMouseOver()"
-        (keypress)="resolvePageNumberKeyInput($event)"
+        (keypress)="resolvePageNumberInput($event)"
       />
       <span
         *ngIf="showCurrentPageNumberDisplay"
         class="current-page-number"
-        (click)="enablePageNumberInputBox()"
+        (click)="enablesPageNumberInputBox()"
       >{{ bondedPageNumber }}</span>
     </div>
     /
