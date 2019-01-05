@@ -19,18 +19,17 @@
         {{ previousPageLabel }}
       </a>
       <input
-        [hidden]="hiddenPageNumberInputBox"
         #pageNumberInputBox
+        [hidden]="hiddenPageNumberInputBox"
         type="text"
         class="current-page-number"
         [maxlength]="maxlength"
         [(ngModel)]="bondedPageNumber"
         [ngModelOptions]="{standalone: true}"
-        (blur)="enableCurrentPageNumberBox()"
-        (input)="resizePageNumberInputBoxWidth(pageNumberInputBox)"
-        (mouseover)="onMouseOver(pageNumberInputBox)"
+        (blur)="enableCurrentPageNumberDisplay()"
+        (input)="resizePageNumberInputBoxWidth()"
+        (mouseover)="onMouseOver()"
         (keypress)="resolvePageNumberKeyInput($event)"
-        autofocus
       />
       <span
       *ngIf="displayCurrentPageNumberBox"

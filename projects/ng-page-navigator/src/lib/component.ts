@@ -35,13 +35,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     currentPageNumber: number;
     bondedPageNumber: number;
     maxlength: number;
-
     firstPageLabel: string;
     previousPageLabel: string;
     nextPageLabel: string;
     lastPageLabel: string;
-
-    displayCurrentPageNumberBox: boolean;
+    showCurrentPageNumberDisplay: boolean;
     hiddenPageNumberInputBox: boolean;
 
     private queryParamsSubscription: Subscription;
@@ -51,7 +49,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         private router: Router
     ) {
         this.changePage = new EventEmitter();
-        this.displayCurrentPageNumberBox = true;
+        this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
 
         this.currentPageNumber = 1;
@@ -98,7 +96,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
         // eventTarget['value'] += event.keyCode;
 
-        // this.resizePageNumberInputBoxWidth(eventTarget);
+        // this.resizePageNumberInputBoxWidth();
     }
 
     isOnFrontPage(): boolean {
@@ -136,6 +134,9 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     navigateTo(pageNumber: number) {
+        const
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+
         this.bondedPageNumber = parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
 
@@ -150,26 +151,31 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             this.changePage.emit(this.bondedPageNumber);
         }
 
-        // this.resizePageNumberInputBoxWidth();
+        pageNumberInputBox.value = `${this.currentPageNumber}`;
+
+        this.resizePageNumberInputBoxWidth();
     }
 
-    enableCurrentPageNumberBox() {
-        this.displayCurrentPageNumberBox = true;
+    enableCurrentPageNumberDisplay() {
+        this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
     }
 
     enablePageNumberInputBox() {
-        this.displayCurrentPageNumberBox = false;
+        this.showCurrentPageNumberDisplay = false;
         this.hiddenPageNumberInputBox = false;
     }
 
-    onMouseOver(pageNumberInputBox: HTMLInputElement) {
+    onMouseOver() {
+        const
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+
         pageNumberInputBox.focus();
     }
 
-    // mudar para não precisar mais recever este parâmetro
-    resizePageNumberInputBoxWidth(pageNumberInputBox: HTMLInputElement) {
+    resizePageNumberInputBoxWidth() {
         const
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement,
             computedStyle = window.getComputedStyle(pageNumberInputBox),
             pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
             minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
