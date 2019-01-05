@@ -24,13 +24,13 @@ import { Subscription } from 'rxjs';
 export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     @Input() queryParamPropertyName: string;
-
     @Input() totalPages: number;
     @Input() labelTranslations: Object;
-
     @Input() widthGrowthToggleFactor: number;
 
     @Output() changePage: EventEmitter<number>;
+
+    @ViewChild('pageNumberInputBox') pageNumberInputBox: ElementRef;
 
     currentPageNumber: number;
     bondedPageNumber: number;
@@ -46,14 +46,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     private queryParamsSubscription: Subscription;
 
-    private pageNumberInputBoxLength: number;
-
     constructor(
         private route: ActivatedRoute,
         private router: Router
     ) {
         this.changePage = new EventEmitter();
-        this.pageNumberInputBoxLength = 0;
         this.displayCurrentPageNumberBox = true;
         this.hiddenPageNumberInputBox = true;
 
@@ -63,7 +60,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.widthGrowthToggleFactor = 6.79;
+        this.widthGrowthToggleFactor = 8.46;
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(
             (params: Object) => {
@@ -91,12 +88,16 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         const
            eventTarget: any = event.currentTarget;
 
-        event.preventDefault();
+        // event.preventDefault();
+
+        // console.log(event.key);
+        // console.log('called');
 
         // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
-        eventTarget['value'] += event.key;
+        // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
+        // eventTarget['value'] += event.keyCode;
 
-        this.resizePageNumberInputBoxWidth(eventTarget);
+        // this.resizePageNumberInputBoxWidth(eventTarget);
     }
 
     isOnFrontPage(): boolean {
@@ -147,6 +148,8 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         } else {
             this.changePage.emit(this.bondedPageNumber);
         }
+
+        // this.resizePageNumberInputBoxWidth();
     }
 
     enableCurrentPageNumberBox() {
@@ -163,19 +166,19 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         pageNumberInputBox.focus();
     }
 
+    // mudar para não precisar mais recever este parâmetro
     resizePageNumberInputBoxWidth(pageNumberInputBox: HTMLInputElement) {
         const
-            computedStyle = window.getComputedStyle(pageNumberInputBox);
+            computedStyle = window.getComputedStyle(pageNumberInputBox),
+            pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
+            minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
+                Number.parseFloat(computedStyle.paddingLeft) +
+                Number.parseFloat(computedStyle.borderRightWidth) +
+                Number.parseFloat(computedStyle.paddingRight);
 
         this.resetMaxLength();
 
-        if (pageNumberInputBox.value.length > this.pageNumberInputBoxLength) {
-            pageNumberInputBox.style.width = `${Number.parseFloat(computedStyle.width) + this.widthGrowthToggleFactor}px`;
-        } else if (pageNumberInputBox.value.length < this.pageNumberInputBoxLength) {
-            pageNumberInputBox.style.width = `${Number.parseFloat(computedStyle.width) - this.widthGrowthToggleFactor}px`;
-        }
-
-        this.pageNumberInputBoxLength = pageNumberInputBox.value.length;
+        pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
     }
 
     private resetMaxLength() {
