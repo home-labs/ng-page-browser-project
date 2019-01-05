@@ -60,6 +60,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // relative to font size
         this.widthGrowthToggleFactor = 8.46;
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(
