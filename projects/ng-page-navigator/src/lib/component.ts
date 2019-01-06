@@ -6,7 +6,8 @@ import {
     Output,
     EventEmitter,
     ElementRef,
-    ViewChild
+    ViewChild,
+    AfterViewInit
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -21,7 +22,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './template.html',
     styleUrls: ['./style.sass']
 })
-export class PageNavigatorComponent implements OnInit, OnDestroy {
+export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() queryParamPropertyName: string;
     @Input() totalPages: number;
@@ -31,7 +32,11 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
     @Output() changePage: EventEmitter<number>;
 
-    @ViewChild('pageNumberInputBox') private pageNumberInputBox: ElementRef;
+    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
+    // @ViewChild('pageNumberInputBox') private pageNumberInputBoxElementRef: ElementRef;
+    @ViewChild('pageNumberInputBox') private pageNumberInputBoxElementRef: any;
+
+    private pageNumberInputBox: HTMLInputElement;
 
     currentPageNumber: number;
     bondedPageNumber: number;
@@ -56,6 +61,10 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         this.currentPageNumber = 1;
         this.bondedPageNumber = 1;
         this.maxlength = 1;
+    }
+
+    ngAfterViewInit() {
+        this.pageNumberInputBox = this.pageNumberInputBoxElementRef.nativeElement;
     }
 
     ngOnInit() {
@@ -85,21 +94,21 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
         }
     }
 
-    resolvePageNumberInput(event: KeyboardEvent) {
-        const
-           eventTarget: any = event.currentTarget;
+    // resolvePageNumberInput(event: KeyboardEvent) {
+    //     // const
+    //     //    eventTarget: any = event.currentTarget;
 
-        // event.preventDefault();
+    //     // event.preventDefault();
 
-        // console.log(event.key);
-        // console.log('called');
+    //     // console.log(event.key);
+    //     // console.log('called');
 
-        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
-        // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
-        // eventTarget['value'] += event.keyCode;
+    //     // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
+    //     // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
+    //     // eventTarget['value'] += event.keyCode;
 
-        // this.resizePageNumberInputBoxWidth();
-    }
+    //     // this.resizePageNumberInputBoxWidth();
+    // }
 
     isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
@@ -136,9 +145,6 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     navigateTo(pageNumber: number) {
-        const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
-
         this.bondedPageNumber = parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
 
@@ -153,7 +159,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
             this.changePage.emit(this.bondedPageNumber);
         }
 
-        pageNumberInputBox.value = `${this.currentPageNumber}`;
+        this.pageNumberInputBox.value = `${this.currentPageNumber}`;
 
         this.resizePageNumberInputBoxWidth();
     }
@@ -171,17 +177,13 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
     }
 
     onMouseOver() {
-        const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
-
-        pageNumberInputBox.focus();
+        this.pageNumberInputBox.focus();
     }
 
     resizePageNumberInputBoxWidth() {
         const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement,
-            computedStyle = window.getComputedStyle(pageNumberInputBox),
-            pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
+            computedStyle = window.getComputedStyle(this.pageNumberInputBox),
+            pageNumberInputBoxLength: number = this.pageNumberInputBox.value.length,
             minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
                 Number.parseFloat(computedStyle.paddingLeft) +
                 Number.parseFloat(computedStyle.borderRightWidth) +
@@ -189,7 +191,7 @@ export class PageNavigatorComponent implements OnInit, OnDestroy {
 
         this.resetMaxLength();
 
-        pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
+        this.pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
     }
 
     private resetMaxLength() {
