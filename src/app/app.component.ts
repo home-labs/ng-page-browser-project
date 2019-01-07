@@ -26,11 +26,14 @@ export class AppComponent implements AfterViewInit {
         const
             interval = setInterval(
                 () => {
-                    this._pagination.totalPages = 11110;
+                    this._pagination.totalPages = 1110;
                     console.log('function called after interval');
-                    // clearInterval(interval);
-                }, 5000
+                    clearInterval(interval);
+                }, 2000
             );
+
+        let
+            count: number = 0;
     }
 
     ngAfterViewInit() {

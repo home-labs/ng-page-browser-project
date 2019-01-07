@@ -102,7 +102,7 @@ export class PageNavigatorComponent
 
     ngOnInit() {
         let
-            currentPageNumber: number;
+            currentPageNumber: number = 1;
 
         this.paginationSubscription = this.pagination.subscribreInTotalPages(
             (value: number) => {
