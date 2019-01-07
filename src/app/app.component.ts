@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit {
                 () => {
                     this._pagination.totalPages = 11110;
                     console.log('function called after interval');
-                    clearInterval(interval);
+                    // clearInterval(interval);
                 }, 5000
             );
     }
@@ -37,6 +37,7 @@ export class AppComponent implements AfterViewInit {
     }
 
     onChangePage(pageNumber: number) {
+        this._pagination.totalPages = 11110;
         this.currentPageNumber = pageNumber;
     }
 

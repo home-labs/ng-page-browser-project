@@ -101,10 +101,19 @@ export class PageNavigatorComponent
     }
 
     ngOnInit() {
+        let
+            currentPageNumber: number;
+
         this.paginationSubscription = this.pagination.subscribreInTotalPages(
             (value: number) => {
                 this.totalPages = value;
-                this.reset();
+
+                if (currentPageNumber
+                    && currentPageNumber == this.currentPageNumber) {
+                    this.reset();
+                }
+
+                currentPageNumber = this.currentPageNumber;
             }
         );
 
