@@ -68,11 +68,11 @@ export class MyComponent {
 
             );
     }
-	
+
     onInitPagination(pagination: NgPageNavigator.Pagination) {
-	    this._pagination = pagination;
+        this._pagination = pagination;
     }
-	
+
 }
 ```
 
