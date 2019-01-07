@@ -29,7 +29,6 @@ import { Pagination } from './pagination';
 })
 export class PageNavigatorComponent
        implements
-        OnChanges,
         OnInit,
         AfterViewInit,
         OnDestroy {
@@ -65,9 +64,6 @@ export class PageNavigatorComponent
     private set pageNumberInputBox(value: any) {
         this._pageNumberInputBox = value;
     }
-    private get pageNumberInputBox(): any {
-        return this._pageNumberInputBox;
-    }
 
     constructor(
         private route: ActivatedRoute,
@@ -91,8 +87,6 @@ export class PageNavigatorComponent
         // let
         //     totalPagesChanges: SimpleChange;
 
-        this.ngInit.emit(this.pagination);
-
         // // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
         // if (simpleChanges.hasOwnProperty('totalPages')) {
         //     totalPagesChanges = simpleChanges['totalPages'];
@@ -114,6 +108,8 @@ export class PageNavigatorComponent
                 this.reset();
             }
         );
+
+        this.ngInit.emit(this.pagination);
 
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
