@@ -8,7 +8,6 @@ import {
     ElementRef,
     ViewChild,
     AfterViewInit,
-    OnChanges,
     SimpleChanges,
     SimpleChange
 } from '@angular/core';
