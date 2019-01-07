@@ -58,11 +58,11 @@ export class MyComponent {
     private _pagination: NgPageNavigator.Pagination;
 
     constructor() {
-	    const
-		    interval  =  setInterval(
-			    () => {
-				    this._pagination.totalPages  =  100;
-				    clearInterval(interval);
+        const
+            interval  =  setInterval(
+                () => {
+                    this._pagination.totalPages  =  100;
+                    clearInterval(interval);
 
                 }, 5000
 
