@@ -61,7 +61,7 @@ export class MyComponent {
         const
             interval  =  setInterval(
                 () => {
-                    this._pagination.totalPages  =  100;
+                    this._pagination.totalPages = 100;
                     clearInterval(interval);
 
                 }, 5000
