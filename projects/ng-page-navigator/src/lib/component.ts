@@ -7,7 +7,10 @@ import {
     EventEmitter,
     ElementRef,
     ViewChild,
-    AfterViewInit
+    AfterViewInit,
+    OnChanges,
+    SimpleChanges,
+    SimpleChange
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -26,6 +29,7 @@ import { Pagination } from './pagination';
 })
 export class PageNavigatorComponent
        implements
+        OnChanges,
         OnInit,
         AfterViewInit,
         OnDestroy {
@@ -82,21 +86,21 @@ export class PageNavigatorComponent
         this.ngInit = new EventEmitter();
     }
 
-    // ngOnChanges(simpleChanges: SimpleChanges) {
-    //     let
-    //         totalPagesChanges: SimpleChange;
+    ngOnChanges(simpleChanges: SimpleChanges) {
+        // let
+        //     totalPagesChanges: SimpleChange;
 
-    //     console.log(simpleChanges);
+        this.ngInit.emit(this.pagination);
 
-    //     // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
-    //     if (simpleChanges.hasOwnProperty('totalPages')) {
-    //         totalPagesChanges = simpleChanges['totalPages'];
-    //         if (!totalPagesChanges.firstChange) {
-    //             this.reset();
-    //         }
-    //     }
+        // // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
+        // if (simpleChanges.hasOwnProperty('totalPages')) {
+        //     totalPagesChanges = simpleChanges['totalPages'];
+        //     if (!totalPagesChanges.firstChange) {
+        //         this.reset();
+        //     }
+        // }
 
-    // }
+    }
 
     ngAfterViewInit() {
 
@@ -109,8 +113,6 @@ export class PageNavigatorComponent
                 this.reset();
             }
         );
-
-        this.ngInit.emit(this.pagination);
 
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
@@ -240,7 +242,6 @@ export class PageNavigatorComponent
         // event.preventDefault();
 
         // console.log(event.key);
-        // console.log('called');
 
         // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
         // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
