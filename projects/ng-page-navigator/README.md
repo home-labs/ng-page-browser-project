@@ -76,5 +76,7 @@ export class MyComponent {
 }
 ```
 
-**Note.**: `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just click on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable `enablePageNumberInputBox` you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box.
+**Note.**: 
+>- don't use this component nested a HTML block tag with `*ngIf` directive ;
+>- `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just click on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable the page number input box you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box.
 
