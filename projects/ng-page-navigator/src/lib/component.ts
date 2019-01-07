@@ -32,8 +32,8 @@ export class PageNavigatorComponent
 
     @Input() queryParamPropertyName: string;
     @Input() labelTranslations: Object;
-    @Input() widthGrowthToggleFactor: number;
     @Input() enablePageNumberInputBox: boolean;
+    @Input() widthGrowthToggleFactor: number;
 
     @Output() changePage: EventEmitter<number>;
     @Output() ngInit: EventEmitter<Pagination>;

@@ -5,7 +5,6 @@
 
       <!-- [queryParamPropertyName]="'pagina'" -->
     <!-- <page-navigator
-      [totalPages]=10
       [labelTranslations]="{
         firstPage: '⏮',
         previousPage: '⏪',
@@ -14,9 +13,9 @@
       }"
       [enablePageNumberInputBox]="true"
       (changePage)="onChangePage($event)"
+      (ngInit)="onPaginatorInit($event)"
     ></page-navigator> -->
 
-      <!-- [totalPages]=totalPages -->
     <page-navigator
       [labelTranslations]="{
         firstPage: 'first',
@@ -26,7 +25,7 @@
       }"
       [enablePageNumberInputBox]="enablePageNumberInputBox"
       (changePage)="onChangePage($event)"
-      (ngInit)="onPaginatorInit($event)"
+      (ngInit)="onInitPagination($event)"
     ></page-navigator>
   </section>
 </main>

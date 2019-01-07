@@ -17,30 +17,31 @@ export class AppComponent implements AfterViewInit {
     currentPageNumber: number;
     enablePageNumberInputBox: boolean;
 
-    private pagination: NgPageNavigator.Pagination;
+    private _pagination: NgPageNavigator.Pagination;
 
     constructor() {
         this.currentPageNumber = 1;
         this.enablePageNumberInputBox = true;
-    }
 
-    ngAfterViewInit() {
         const
             interval = setInterval(
                 () => {
-                    this.pagination.totalPages = 11110;
+                    this._pagination.totalPages = 11110;
                     console.log('function called after interval');
                     clearInterval(interval);
                 }, 5000
             );
     }
 
+    ngAfterViewInit() {
+    }
+
     onChangePage(pageNumber: number) {
         this.currentPageNumber = pageNumber;
     }
 
-    onPaginatorInit(pagination: NgPageNavigator.Pagination) {
-        this.pagination = pagination;
+    onInitPagination(pagination: NgPageNavigator.Pagination) {
+        this._pagination = pagination;
     }
 
 }
