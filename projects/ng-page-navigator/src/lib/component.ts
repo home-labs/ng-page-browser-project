@@ -30,16 +30,6 @@ export class PageNavigatorComponent
         AfterViewInit,
         OnDestroy {
 
-    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
-    private _pageNumberInputBox: ElementRef;
-    @ViewChild('pageNumberInputBox')
-    private set pageNumberInputBox(value: ElementRef) {
-            this._pageNumberInputBox = value;
-        }
-    private get pageNumberInputBox(): ElementRef {
-        return this._pageNumberInputBox;
-    }
-
     @Input() queryParamPropertyName: string;
     @Input() labelTranslations: Object;
     @Input() widthGrowthToggleFactor: number;
@@ -62,6 +52,16 @@ export class PageNavigatorComponent
 
     private queryParamsSubscription: Subscription;
     private pagination: Pagination;
+
+    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
+    private _pageNumberInputBox: ElementRef;
+    @ViewChild('pageNumberInputBox')
+    private set pageNumberInputBox(value: ElementRef) {
+        this._pageNumberInputBox = value;
+    }
+    private get pageNumberInputBox(): ElementRef {
+        return this._pageNumberInputBox;
+    }
 
     constructor(
         private route: ActivatedRoute,
