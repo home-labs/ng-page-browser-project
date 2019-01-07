@@ -59,12 +59,13 @@ export class PageNavigatorComponent
     private paginationSubscription: Subscription;
 
     // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
+    // private _pageNumberInputBox: ElementRef;
     private _pageNumberInputBox: ElementRef;
     @ViewChild('pageNumberInputBox')
-    private set pageNumberInputBox(value: ElementRef) {
+    private set pageNumberInputBox(value: any) {
         this._pageNumberInputBox = value;
     }
-    private get pageNumberInputBox(): ElementRef {
+    private get pageNumberInputBox(): any {
         return this._pageNumberInputBox;
     }
 
@@ -176,7 +177,7 @@ export class PageNavigatorComponent
 
     navigateTo(pageNumber: number) {
         const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement;
 
         this.bondedPageNumber = parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
@@ -217,14 +218,14 @@ export class PageNavigatorComponent
 
     onMouseOver() {
         const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement;
 
         pageNumberInputBox.focus();
     }
 
     resizePageNumberInputBoxWidth() {
         const
-            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement,
+            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement,
             computedStyle = window.getComputedStyle(pageNumberInputBox),
             pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
             minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
