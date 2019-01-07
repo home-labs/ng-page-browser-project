@@ -52,6 +52,7 @@ export class PageNavigatorComponent
 
     private queryParamsSubscription: Subscription;
     private pagination: Pagination;
+    private paginationSubscription: Subscription;
 
     // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
     private _pageNumberInputBox: ElementRef;
@@ -102,7 +103,7 @@ export class PageNavigatorComponent
     }
 
     ngOnInit() {
-        this.pagination.subscribreInTotalPages(
+        this.paginationSubscription = this.pagination.subscribreInTotalPages(
             (value: number) => {
                 this.totalPages = value;
                 this.reset();
@@ -133,6 +134,8 @@ export class PageNavigatorComponent
             && this.queryParamsSubscription instanceof Subscription) {
             this.queryParamsSubscription.unsubscribe();
         }
+
+        this.paginationSubscription.unsubscribe();
     }
 
     isOnFrontPage(): boolean {
