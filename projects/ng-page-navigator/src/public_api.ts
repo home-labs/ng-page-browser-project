@@ -1,4 +1,4 @@
-// import * as NgPageNavigator from './lib';
-// export { NgPageNavigator };
+import * as NgPageNavigator from './lib';
+export { NgPageNavigator };
 
 export { NgPageNavigatorModule } from './lib';

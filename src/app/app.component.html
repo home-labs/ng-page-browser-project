@@ -16,16 +16,17 @@
       (changePage)="onChangePage($event)"
     ></page-navigator> -->
 
+      <!-- [totalPages]=totalPages -->
     <page-navigator
-      [totalPages]=totalPages
       [labelTranslations]="{
         firstPage: 'first',
         previousPage: '«',
         nextPage: '»',
         lastPage: 'last'
       }"
-      [enablePageNumberInputBox]="true"
+      [enablePageNumberInputBox]="enablePageNumberInputBox"
       (changePage)="onChangePage($event)"
+      (ngInit)="onPaginatorInit($event)"
     ></page-navigator>
   </section>
 </main>

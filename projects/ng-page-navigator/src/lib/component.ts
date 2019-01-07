@@ -14,6 +14,8 @@ import {
     Router
 } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { Pagination } from './pagination';
 // import { NgForm } from '@angular/forms';
 
 
@@ -22,21 +24,29 @@ import { Subscription } from 'rxjs';
     templateUrl: './template.html',
     styleUrls: ['./style.sass']
 })
-export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PageNavigatorComponent
+       implements
+        OnInit,
+        AfterViewInit,
+        OnDestroy {
+
+    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
+    private _pageNumberInputBox: ElementRef;
+    @ViewChild('pageNumberInputBox')
+    private set pageNumberInputBox(value: ElementRef) {
+            this._pageNumberInputBox = value;
+        }
+    private get pageNumberInputBox(): ElementRef {
+        return this._pageNumberInputBox;
+    }
 
     @Input() queryParamPropertyName: string;
-    @Input() totalPages: number;
     @Input() labelTranslations: Object;
     @Input() widthGrowthToggleFactor: number;
     @Input() enablePageNumberInputBox: boolean;
 
     @Output() changePage: EventEmitter<number>;
-
-    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
-    // @ViewChild('pageNumberInputBox') private pageNumberInputBoxElementRef: ElementRef;
-    @ViewChild('pageNumberInputBox') private pageNumberInputBoxElementRef: any;
-
-    private pageNumberInputBox: HTMLInputElement;
+    @Output() ngInit: EventEmitter<Pagination>;
 
     currentPageNumber: number;
     bondedPageNumber: number;
@@ -46,9 +56,12 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
     nextPageLabel: string;
     lastPageLabel: string;
     showCurrentPageNumberDisplay: boolean;
+    showPageNumberInputBox: boolean;
     hiddenPageNumberInputBox: boolean;
+    totalPages: number;
 
     private queryParamsSubscription: Subscription;
+    private pagination: Pagination;
 
     constructor(
         private route: ActivatedRoute,
@@ -57,17 +70,47 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
         this.changePage = new EventEmitter();
         this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
+        this.showPageNumberInputBox = false;
 
         this.currentPageNumber = 1;
         this.bondedPageNumber = 1;
         this.maxlength = 1;
+
+        this.pagination = new Pagination();
+
+        this.ngInit = new EventEmitter();
     }
 
+    // ngOnChanges(simpleChanges: SimpleChanges) {
+    //     let
+    //         totalPagesChanges: SimpleChange;
+
+    //     console.log(simpleChanges);
+
+    //     // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
+    //     if (simpleChanges.hasOwnProperty('totalPages')) {
+    //         totalPagesChanges = simpleChanges['totalPages'];
+    //         if (!totalPagesChanges.firstChange) {
+    //             this.reset();
+    //         }
+    //     }
+
+    // }
+
     ngAfterViewInit() {
-        this.pageNumberInputBox = this.pageNumberInputBoxElementRef.nativeElement;
+
     }
 
     ngOnInit() {
+        this.pagination.subscribreInTotalPages(
+            (value: number) => {
+                this.totalPages = value;
+                this.reset();
+            }
+        );
+
+        this.ngInit.emit(this.pagination);
+
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
         this.enablePageNumberInputBox = this.enablePageNumberInputBox || false;
@@ -83,8 +126,6 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
         );
 
         this.resolveLabelTranslations();
-
-        this.resetMaxLength();
     }
 
     ngOnDestroy() {
@@ -94,28 +135,12 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
         }
     }
 
-    // resolvePageNumberInput(event: KeyboardEvent) {
-    //     // const
-    //     //    eventTarget: any = event.currentTarget;
-
-    //     // event.preventDefault();
-
-    //     // console.log(event.key);
-    //     // console.log('called');
-
-    //     // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
-    //     // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
-    //     // eventTarget['value'] += event.keyCode;
-
-    //     // this.resizePageNumberInputBoxWidth();
-    // }
-
     isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
     }
 
     isOnLastPage(): boolean {
-        return this.currentPageNumber === this.totalPages;
+        return this.currentPageNumber === this.pagination.totalPages;
     }
 
     getPreviousPage(): number {
@@ -145,6 +170,9 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     navigateTo(pageNumber: number) {
+        const
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+
         this.bondedPageNumber = parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
 
@@ -159,43 +187,69 @@ export class PageNavigatorComponent implements OnInit, AfterViewInit, OnDestroy 
             this.changePage.emit(this.bondedPageNumber);
         }
 
-        this.pageNumberInputBox.value = `${this.currentPageNumber}`;
+        if (this.enablePageNumberInputBox) {
+            pageNumberInputBox.value = `${this.currentPageNumber}`;
+            this.resizePageNumberInputBoxWidth();
+        }
 
-        this.resizePageNumberInputBoxWidth();
     }
 
     enablesCurrentPageNumberDisplay() {
-        this.showCurrentPageNumberDisplay = true;
-        this.hiddenPageNumberInputBox = true;
+        if (this.enablePageNumberInputBox) {
+            this.showPageNumberInputBox = false;
+            this.showCurrentPageNumberDisplay = true;
+            this.hiddenPageNumberInputBox = true;
+        }
     }
 
     enablesPageNumberInputBox() {
         if (this.enablePageNumberInputBox) {
+            this.showPageNumberInputBox = true;
             this.showCurrentPageNumberDisplay = false;
             this.hiddenPageNumberInputBox = false;
         }
     }
 
     onMouseOver() {
-        this.pageNumberInputBox.focus();
+        const
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+
+        pageNumberInputBox.focus();
     }
 
     resizePageNumberInputBoxWidth() {
         const
-            computedStyle = window.getComputedStyle(this.pageNumberInputBox),
-            pageNumberInputBoxLength: number = this.pageNumberInputBox.value.length,
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement,
+            computedStyle = window.getComputedStyle(pageNumberInputBox),
+            pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
             minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
                 Number.parseFloat(computedStyle.paddingLeft) +
                 Number.parseFloat(computedStyle.borderRightWidth) +
                 Number.parseFloat(computedStyle.paddingRight);
 
-        this.resetMaxLength();
-
-        this.pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
+        pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
     }
 
-    private resetMaxLength() {
-        this.maxlength = `${this.totalPages}`.length;
+    resolvePageNumberInput(event: KeyboardEvent) {
+        // const
+        //    eventTarget: any = event.currentTarget;
+
+        // event.preventDefault();
+
+        // console.log(event.key);
+        // console.log('called');
+
+        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
+        // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
+        // eventTarget['value'] += event.keyCode;
+
+        // this.resizePageNumberInputBoxWidth();
+    }
+
+    private reset() {
+        this.currentPageNumber = 1;
+        this.bondedPageNumber = this.currentPageNumber;
+        this.maxlength = `${this.pagination.totalPages}`.length;
     }
 
     private getQueryParamsStatement(pageNumber: number): Object {
