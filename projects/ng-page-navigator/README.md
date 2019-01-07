@@ -44,34 +44,34 @@ So in your component import `NgPageNavigator` and define `onInitPagination` meth
 
 ```typescript
 import {
-	Component
+    Component
 } from  '@angular/core';
 
 import { NgPageNavigator} from 'ng-page-navigator';
 
 
 @Component({
-	// ...
+    // ...
 })
 export class MyComponent {
 
-	private _pagination: NgPageNavigator.Pagination;
+    private _pagination: NgPageNavigator.Pagination;
 
-	constructor() {
-		const
-			interval  =  setInterval(
-				() => {
-					this._pagination.totalPages  =  100;
-					clearInterval(interval);
+    constructor() {
+	    const
+		    interval  =  setInterval(
+			    () => {
+				    this._pagination.totalPages  =  100;
+				    clearInterval(interval);
 
-				}, 5000
+                }, 5000
 
-			);
-	}
+            );
+    }
 	
-	onInitPagination(pagination: NgPageNavigator.Pagination) {
-		this._pagination = pagination;
-	}
+    onInitPagination(pagination: NgPageNavigator.Pagination) {
+	    this._pagination = pagination;
+    }
 	
 }
 ```
