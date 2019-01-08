@@ -63,8 +63,7 @@ export class MyComponent {
                 () => {
                     this._pagination.totalPages = 100;
                     clearInterval(interval);
-
-                }, 5000
+                }, 2000
 
             );
     }
