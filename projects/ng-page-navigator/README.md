@@ -13,7 +13,7 @@
 Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageNavigatorModule` from `ng-page-navigator`, like that.
 
 ```typescript
-import { NgPageNavigatorModule} from 'ng-page-navigator';
+import { NgPageNavigatorModule } from 'ng-page-navigator';
 
 @NgModule({
     imports: [
