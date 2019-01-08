@@ -35,7 +35,7 @@ export class MyModule() { }
   }"
   [enablePageNumberInputBox]="true || false"
   [widthGrowthToggleFactor]="8.46"
-  (changePage)="methodToPageOfYourComponent($event)"
+  (changePage)="onChangePage($event)"
   (ngInit)="onInitPagination($event)"
 ></page-navigator>
 ```
