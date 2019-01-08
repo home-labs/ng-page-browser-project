@@ -59,7 +59,7 @@ export class MyComponent {
 
     constructor() {
         const
-	        // example to assign totalPages belatedly
+            // example to assign totalPages belatedly
             interval: NodeJS.Timer = setInterval(
                 () => {
                     this._pagination.totalPages = 100;
