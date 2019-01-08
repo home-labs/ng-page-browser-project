@@ -13,7 +13,7 @@
 Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageNavigatorModule` from `ng-page-navigator`, like that.
 
 ```typescript
-import { NgPageNavigatorModule} from 'ng-page-navigator';
+import { NgPageNavigatorModule } from 'ng-page-navigator';
 
 @NgModule({
     imports: [
@@ -35,19 +35,19 @@ export class MyModule() { }
   }"
   [enablePageNumberInputBox]="true || false"
   [widthGrowthToggleFactor]="8.46"
-  (changePage)="methodToPageOfYourComponent($event)"
+  (changePage)="onChangePage($event)"
   (ngInit)="onInitPagination($event)"
 ></page-navigator>
 ```
 
-So in your component import `NgPageNavigator` and define `onInitPagination` method (or with another name of your taste) to receibes `Pagination` object to set `totalPages` when your component knows the total pages.
+So in your component import `NgPageNavigator` and define `onInitPagination` method (or with another name of your taste) to receives `Pagination` object to set `totalPages` when your component knows the total pages.
 
 ```typescript
 import {
     Component
 } from  '@angular/core';
 
-import { NgPageNavigator} from 'ng-page-navigator';
+import { NgPageNavigator } from 'ng-page-navigator';
 
 
 @Component({
@@ -59,12 +59,12 @@ export class MyComponent {
 
     constructor() {
         const
-            interval  =  setInterval(
+            // example to assign totalPages belatedly
+            interval: NodeJS.Timer = setInterval(
                 () => {
                     this._pagination.totalPages = 100;
                     clearInterval(interval);
                 }, 2000
-
             );
     }
 
