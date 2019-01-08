@@ -47,7 +47,7 @@ import {
     Component
 } from  '@angular/core';
 
-import { NgPageNavigator} from 'ng-page-navigator';
+import { NgPageNavigator } from 'ng-page-navigator';
 
 
 @Component({
