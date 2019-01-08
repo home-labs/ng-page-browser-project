@@ -1,6 +1,6 @@
 {
   "name": "ng-page-navigator",
-  "version": "1.1.0-rc.7",
+  "version": "1.1.0-rc.8",
   "peerDependencies": {
     "rxjs": ">=4.0.0",
     "@angular/common": ">=4.0.0",

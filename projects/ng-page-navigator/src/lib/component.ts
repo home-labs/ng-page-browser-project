@@ -62,6 +62,10 @@ export class PageNavigatorComponent
     @ViewChild('pageNumberInputBox')
     private set pageNumberInputBox(value: any) {
         this._pageNumberInputBox = value;
+
+        if (value) {
+            this.resizePageNumberInputBoxWidth();
+        }
     }
 
     constructor(
