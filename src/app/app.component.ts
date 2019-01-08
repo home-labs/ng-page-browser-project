@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
         this.enablePageNumberInputBox = true;
 
         const
-            interval = setInterval(
+            interval: NodeJS.Timer = setInterval(
                 () => {
                     this._pagination.totalPages = 1110;
                     console.log('function called after interval');
