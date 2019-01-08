@@ -40,7 +40,7 @@ export class MyModule() { }
 ></page-navigator>
 ```
 
-So in your component import `NgPageNavigator` and define `onInitPagination` method (or with another name of your taste) to receibes `Pagination` object to set `totalPages` when your component knows the total pages.
+So in your component import `NgPageNavigator` and define `onInitPagination` method (or with another name of your taste) to receives `Pagination` object to set `totalPages` when your component knows the total pages.
 
 ```typescript
 import {
