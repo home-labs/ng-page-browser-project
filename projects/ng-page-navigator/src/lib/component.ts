@@ -56,8 +56,6 @@ export class PageNavigatorComponent
     private pagination: Pagination;
     private paginationSubscription: Subscription;
 
-    // when defining the kind as "ElementRef", a warning is being raised when building the project, I don't know why.
-    // private _pageNumberInputBox: ElementRef;
     private _pageNumberInputBox: ElementRef;
     @ViewChild('pageNumberInputBox')
     private set pageNumberInputBox(value: any) {
