@@ -70,7 +70,7 @@ export class MyComponent implements OnInit {
             );
     }
 
-	onChangesPage(pageNumber:  number) {
+	onChangePage(pageNumber:  number) {
 	    
 	}
 
