@@ -26,7 +26,8 @@ export class MyModule() { }
 ## Data and Event Binding
 
 ```html
-<page-navigator
+<lib-page-navigator
+  #pageNavigator
   [labelTranslations]="{
     firstPage: 'First',
     previousPage: '«',
@@ -36,15 +37,16 @@ export class MyModule() { }
   [enablePageNumberInputBox]="true || false"
   [widthGrowthToggleFactor]="8.46"
   (changePage)="onChangePage($event)"
-  (ngInit)="onInitPagination($event)"
-></page-navigator>
+></lib-page-navigator>
 ```
 
-So in your component import `NgPageNavigator` and define `onInitPagination` method (or with another name of your taste) to receives `Pagination` object to set `totalPages` when your component knows the total pages.
+So...
 
 ```typescript
 import {
-    Component
+    Component,
+    OnInit,
+    ViewChild
 } from  '@angular/core';
 
 import { NgPageNavigator } from 'ng-page-navigator';
@@ -53,24 +55,24 @@ import { NgPageNavigator } from 'ng-page-navigator';
 @Component({
     // ...
 })
-export class MyComponent {
+export class MyComponent implements OnInit {
 
-    private _pagination: NgPageNavigator.Pagination;
+    @ViewChild('pageNavigator') private  pageNavigator:  NgPageNavigator.Components.PageNavigatorComponent;
 
     constructor() {
         const
             // example to assign totalPages belatedly
             interval: NodeJS.Timer = setInterval(
                 () => {
-                    this._pagination.totalPages = 100;
+                    this.pageNavigator.totalPages = 100;
                     clearInterval(interval);
                 }, 2000
             );
     }
 
-    onInitPagination(pagination: NgPageNavigator.Pagination) {
-        this._pagination = pagination;
-    }
+	onChangesPage(pageNumber:  number) {
+	    
+	}
 
 }
 ```
