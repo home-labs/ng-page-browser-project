@@ -14,7 +14,7 @@ import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api
 })
 export class AppComponent implements OnInit {
 
-    // @ViewChild('pageNavigator') private pageNavigator: NgPageNavigator.;
+    @ViewChild('pageNavigator') private pageNavigator: NgPageNavigator.Components.PageNavigatorComponent;
 
     title = 'app';
     currentPageNumber: number;

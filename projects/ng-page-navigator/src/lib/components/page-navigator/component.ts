@@ -17,7 +17,7 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Pagination } from './pagination';
+import { Pagination } from '../../pagination';
 // import { NgForm } from '@angular/forms';
 
 

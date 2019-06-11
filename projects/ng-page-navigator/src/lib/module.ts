@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { PageNavigatorComponent } from './component';
+import { PageNavigatorComponent } from './components/page-navigator/component';
+
 
 @NgModule({
     imports: [
