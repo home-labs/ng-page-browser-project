@@ -15,10 +15,8 @@ import {
     ActivatedRoute,
     Router
 } from '@angular/router';
-import { Subscription } from 'rxjs';
-
-import { Pagination } from '../../pagination';
 // import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -33,28 +31,55 @@ export class PageNavigatorComponent
         OnDestroy {
 
     @Input() queryParamPropertyName: string;
+
     @Input() labelTranslations: Object;
+
     @Input() enablePageNumberInputBox: boolean;
+
     @Input() widthGrowthToggleFactor: number;
 
     @Output() changePage: EventEmitter<number>;
-    @Output() ngInit: EventEmitter<Pagination>;
+
+    set totalPages(value: number) {
+        this._totalPages = value;
+
+        if (this.cachedPageNumber
+            && this.cachedPageNumber === this.currentPageNumber) {
+            this.reset();
+        }
+
+        this.cachedPageNumber = this.currentPageNumber;
+    }
+
+    get totalPages(): number {
+        return this._totalPages;
+    }
 
     currentPageNumber: number;
+
+    cachedPageNumber: number;
+
     bondedPageNumber: number;
+
     maxlength: number;
+
     firstPageLabel: string;
+
     previousPageLabel: string;
+
     nextPageLabel: string;
+
     lastPageLabel: string;
+
     showCurrentPageNumberDisplay: boolean;
+
     showPageNumberInputBox: boolean;
+
     hiddenPageNumberInputBox: boolean;
-    totalPages: number;
+
+    private _totalPages: number;
 
     private queryParamsSubscription: Subscription;
-    private pagination: Pagination;
-    private paginationSubscription: Subscription;
 
     private _pageNumberInputBox: ElementRef;
     @ViewChild('pageNumberInputBox')
@@ -70,6 +95,9 @@ export class PageNavigatorComponent
         private route: ActivatedRoute,
         private router: Router
     ) {
+        this._totalPages = 1;
+        this.cachedPageNumber = 1;
+
         this.changePage = new EventEmitter();
         this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
@@ -78,10 +106,6 @@ export class PageNavigatorComponent
         this.currentPageNumber = 1;
         this.bondedPageNumber = 1;
         this.maxlength = 1;
-
-        this.pagination = new Pagination();
-
-        this.ngInit = new EventEmitter();
     }
 
     // ngOnChanges(simpleChanges: SimpleChanges) {
@@ -102,24 +126,6 @@ export class PageNavigatorComponent
     }
 
     ngOnInit() {
-        let
-            currentPageNumber: Number = 1;
-
-        this.paginationSubscription = this.pagination.subscribre2ReciveTotalPages(
-            (value: number) => {
-                this.totalPages = value;
-
-                if (currentPageNumber
-                    && currentPageNumber === this.currentPageNumber) {
-                    this.reset();
-                }
-
-                currentPageNumber = this.currentPageNumber;
-            }
-        );
-
-        this.ngInit.emit(this.pagination);
-
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
         this.enablePageNumberInputBox = this.enablePageNumberInputBox || false;
@@ -142,8 +148,6 @@ export class PageNavigatorComponent
             && this.queryParamsSubscription instanceof Subscription) {
             this.queryParamsSubscription.unsubscribe();
         }
-
-        this.paginationSubscription.unsubscribe();
     }
 
     isOnFrontPage(): boolean {
@@ -151,7 +155,7 @@ export class PageNavigatorComponent
     }
 
     isOnLastPage(): boolean {
-        return this.currentPageNumber === this.pagination.totalPages;
+        return this.currentPageNumber === this._totalPages;
     }
 
     getPreviousPage(): number {
@@ -259,7 +263,7 @@ export class PageNavigatorComponent
     private reset() {
         this.currentPageNumber = 1;
         this.bondedPageNumber = this.currentPageNumber;
-        this.maxlength = `${this.pagination.totalPages}`.length;
+        this.maxlength = `${this._totalPages}`.length;
     }
 
     private getQueryParamsStatement(pageNumber: number): Object {

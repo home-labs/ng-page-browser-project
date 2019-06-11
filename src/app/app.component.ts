@@ -17,10 +17,10 @@ export class AppComponent implements OnInit {
     @ViewChild('pageNavigator') private pageNavigator: NgPageNavigator.Components.PageNavigatorComponent;
 
     title = 'app';
-    currentPageNumber: number;
-    enablePageNumberInputBox: boolean;
 
-    private _pagination: NgPageNavigator.Pagination;
+    currentPageNumber: number;
+
+    enablePageNumberInputBox: boolean;
 
     constructor() {
         this.currentPageNumber = 1;
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         const
             interval: NodeJS.Timer = setInterval(
                 () => {
-                    this._pagination.totalPages = 1110;
+                    this.pageNavigator.totalPages = 1110;
                     console.log('function called after interval');
                     clearInterval(interval);
                 }, 2000
@@ -41,12 +41,8 @@ export class AppComponent implements OnInit {
     }
 
     onChangePage(pageNumber: number) {
-        this._pagination.totalPages = 11110;
+        this.pageNavigator.totalPages = 11110;
         this.currentPageNumber = pageNumber;
-    }
-
-    onInitPagination(pagination: NgPageNavigator.Pagination) {
-        this._pagination = pagination;
     }
 
 }
