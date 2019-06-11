@@ -23,8 +23,8 @@ export class Pagination {
         this.totalPagesSubscription = new Subject();
     }
 
-    subscribreInTotalPages(callback?): Subscription {
-        return this.totalPagesSubscription.subscribe(callback);
+    subscribre2ReciveTotalPages(callback: Function): Subscription {
+        return this.totalPagesSubscription.subscribe(callback as any);
     }
 
 }

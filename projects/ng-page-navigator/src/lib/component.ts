@@ -7,9 +7,9 @@ import {
     EventEmitter,
     ElementRef,
     ViewChild,
-    AfterViewInit,
-    SimpleChanges,
-    SimpleChange
+    AfterViewInit
+    // SimpleChanges,
+    // SimpleChange
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -22,7 +22,7 @@ import { Pagination } from './pagination';
 
 
 @Component({
-    selector: 'page-navigator',
+    selector: 'lib-page-navigator',
     templateUrl: './template.html',
     styleUrls: ['./style.sass']
 })
@@ -84,19 +84,18 @@ export class PageNavigatorComponent
         this.ngInit = new EventEmitter();
     }
 
-    ngOnChanges(simpleChanges: SimpleChanges) {
-        // let
-        //     totalPagesChanges: SimpleChange;
+    // ngOnChanges(simpleChanges: SimpleChanges) {
+    //     let
+    //         totalPagesChanges: SimpleChange;
 
-        // // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
-        // if (simpleChanges.hasOwnProperty('totalPages')) {
-        //     totalPagesChanges = simpleChanges['totalPages'];
-        //     if (!totalPagesChanges.firstChange) {
-        //         this.reset();
-        //     }
-        // }
-
-    }
+    //     // só isso não resolveria já que se a quantidade de páginas atribuída for a mesma que a anterior, este método não será chamado
+    //     if (simpleChanges.hasOwnProperty('totalPages')) {
+    //         totalPagesChanges = simpleChanges['totalPages'];
+    //         if (!totalPagesChanges.firstChange) {
+    //             this.reset();
+    //         }
+    //     }
+    // }
 
     ngAfterViewInit() {
 
@@ -104,14 +103,14 @@ export class PageNavigatorComponent
 
     ngOnInit() {
         let
-            currentPageNumber: number = 1;
+            currentPageNumber: Number = 1;
 
-        this.paginationSubscription = this.pagination.subscribreInTotalPages(
+        this.paginationSubscription = this.pagination.subscribre2ReciveTotalPages(
             (value: number) => {
                 this.totalPages = value;
 
                 if (currentPageNumber
-                    && currentPageNumber == this.currentPageNumber) {
+                    && currentPageNumber === this.currentPageNumber) {
                     this.reset();
                 }
 
@@ -157,7 +156,7 @@ export class PageNavigatorComponent
 
     getPreviousPage(): number {
         if (this.bondedPageNumber && this.bondedPageNumber > 0) {
-            if (this.bondedPageNumber != this.currentPageNumber
+            if (this.bondedPageNumber !== this.currentPageNumber
                 && this.bondedPageNumber < this.currentPageNumber) {
                 return this.bondedPageNumber;
             }
@@ -170,7 +169,7 @@ export class PageNavigatorComponent
 
     getNextPage(): number {
         if (this.bondedPageNumber && this.bondedPageNumber > 0) {
-            if (this.bondedPageNumber != this.currentPageNumber
+            if (this.bondedPageNumber !== this.currentPageNumber
                 && this.bondedPageNumber > this.currentPageNumber) {
                 return this.bondedPageNumber;
             }
@@ -185,14 +184,14 @@ export class PageNavigatorComponent
         const
             pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement;
 
-        this.bondedPageNumber = parseInt(`${pageNumber}`);
+        this.bondedPageNumber = Number.parseInt(`${pageNumber}`);
         this.currentPageNumber = this.bondedPageNumber;
 
         if (this.queryParamPropertyName) {
             this.router.navigate([location.pathname],
                 {
                     queryParams: this.getQueryParamsStatement(this.bondedPageNumber),
-                    queryParamsHandling: "merge"
+                    queryParamsHandling: 'merge'
                 }
             );
         } else {
@@ -250,10 +249,10 @@ export class PageNavigatorComponent
 
         // console.log(event.key);
 
-        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] + event.key should be smaller than or equal to totalPages
-        // ver problema ao selecionar e digitar, porque está sendo concatenado ao invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso)
-        // eventTarget['value'] += event.keyCode;
-
+        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] +
+        // event.key should be smaller than or equal to totalPages ver problema ao selecionar e digitar, porque está sendo concatenado ao
+        // invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso) eventTarget['value'] +=
+        // event.keyCode;
         // this.resizePageNumberInputBoxWidth();
     }
 

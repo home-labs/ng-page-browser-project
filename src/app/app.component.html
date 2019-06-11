@@ -4,7 +4,8 @@
     Navigated to: {{ currentPageNumber }}
 
       <!-- [queryParamPropertyName]="'pagina'" -->
-    <!-- <page-navigator
+    <!-- <lib-page-navigator
+      #pageNavigator
       [labelTranslations]="{
         firstPage: '⏮',
         previousPage: '⏪',
@@ -14,9 +15,10 @@
       [enablePageNumberInputBox]="true"
       (changePage)="onChangePage($event)"
       (ngInit)="onPaginatorInit($event)"
-    ></page-navigator> -->
+    ></lib-page-navigator> -->
 
-    <page-navigator
+    <lib-page-navigator
+      #pageNavigator
       [labelTranslations]="{
         firstPage: 'first',
         previousPage: '«',
@@ -26,6 +28,7 @@
       [enablePageNumberInputBox]="enablePageNumberInputBox"
       (changePage)="onChangePage($event)"
       (ngInit)="onInitPagination($event)"
-    ></page-navigator>
+    ></lib-page-navigator>
+
   </section>
 </main>

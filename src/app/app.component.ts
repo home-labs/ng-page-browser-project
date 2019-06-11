@@ -1,6 +1,7 @@
 import {
     Component,
-    AfterViewInit
+    OnInit,
+    ViewChild
 } from '@angular/core';
 
 import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api';
@@ -11,9 +12,11 @@ import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements AfterViewInit {
-    title = 'app';
+export class AppComponent implements OnInit {
 
+    // @ViewChild('pageNavigator') private pageNavigator: NgPageNavigator.;
+
+    title = 'app';
     currentPageNumber: number;
     enablePageNumberInputBox: boolean;
 
@@ -31,12 +34,10 @@ export class AppComponent implements AfterViewInit {
                     clearInterval(interval);
                 }, 2000
             );
-
-        let
-            count: number = 0;
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
+
     }
 
     onChangePage(pageNumber: number) {
