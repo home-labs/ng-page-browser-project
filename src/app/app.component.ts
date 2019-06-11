@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
     }
 
     onChangePage(pageNumber: number) {
-        this.pageNavigator.totalPages = 11110;
         this.currentPageNumber = pageNumber;
     }
 

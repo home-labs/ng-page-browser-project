@@ -9,6 +9,7 @@ import { NgPageNavigatorModule } from '../../projects/ng-page-navigator/src/publ
 @NgModule({
     imports: [
         BrowserModule,
+
         NgPageNavigatorModule
     ],
     declarations: [
