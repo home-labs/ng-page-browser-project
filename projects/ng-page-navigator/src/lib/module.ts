@@ -16,9 +16,6 @@ import { PageNavigatorComponent } from './components/page-navigator/component';
         PageNavigatorComponent
     ],
     exports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
         PageNavigatorComponent
     ]
 })

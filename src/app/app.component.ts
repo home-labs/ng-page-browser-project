@@ -4,7 +4,8 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api';
+// import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api';
+import { NgPageNavigator } from 'ng-page-navigator';
 
 
 @Component({
