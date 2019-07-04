@@ -7,9 +7,9 @@ import {
     EventEmitter,
     ElementRef,
     ViewChild,
-    AfterViewInit
     // SimpleChanges,
-    // SimpleChange
+    // SimpleChange,
+    AfterViewInit
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -245,20 +245,20 @@ export class PageNavigatorComponent
         pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
     }
 
-    resolvePageNumberInput(event: KeyboardEvent) {
-        // const
-        //    eventTarget: any = event.currentTarget;
+    // resolvePageNumberInput(event: KeyboardEvent) {
+    //     // const
+    //     //    eventTarget: any = event.currentTarget;
 
-        // event.preventDefault();
+    //     // event.preventDefault();
 
-        // console.log(event.key);
+    //     // console.log(event.key);
 
-        // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] +
-        // event.key should be smaller than or equal to totalPages ver problema ao selecionar e digitar, porque está sendo concatenado ao
-        // invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso) eventTarget['value'] +=
-        // event.keyCode;
-        // this.resizePageNumberInputBoxWidth();
-    }
+    //     // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] +
+    //     // event.key should be smaller than or equal to totalPages ver problema ao selecionar e digitar, porque está sendo concatenado ao
+    //     // invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso) eventTarget['value'] +=
+    //     // event.keyCode;
+    //     // this.resizePageNumberInputBoxWidth();
+    // }
 
     private reset() {
         this.currentPageNumber = 1;
