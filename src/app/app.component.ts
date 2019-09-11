@@ -14,7 +14,6 @@ import { PageNavigatorComponent } from '@rplaurindo/ng-page-navigator';
 })
 export class AppComponent implements OnInit {
 
-    // @ViewChild('pageNavigator', { static: true }) private pageNavigator: NgPageNavigator.PageNavigatorComponent;
     @ViewChild('pageNavigator', { static: true }) private pageNavigator: PageNavigatorComponent;
 
     title = 'app';
