@@ -4,18 +4,17 @@ import {
     ViewChild
 } from '@angular/core';
 
-// import { NgPageNavigator } from '../../projects/ng-page-navigator/src/public_api';
-import { NgPageNavigator } from 'ng-page-navigator';
+import { NgPageNavigator } from '@rplaurindo/ng-page-navigator';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.sass']
+    styleUrls: ['./app.component.styl']
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('pageNavigator') private pageNavigator: NgPageNavigator.Components.PageNavigatorComponent;
+    @ViewChild('pageNavigator', {static: true}) private pageNavigator: NgPageNavigator.PageNavigatorComponent;
 
     title = 'app';
 
@@ -28,7 +27,7 @@ export class AppComponent implements OnInit {
         this.enablePageNumberInputBox = true;
 
         const
-            interval: NodeJS.Timer = setInterval(
+            interval = setInterval(
                 () => {
                     this.pageNavigator.totalPages = 1110;
                     console.log('function called after interval');

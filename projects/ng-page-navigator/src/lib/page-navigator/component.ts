@@ -18,11 +18,23 @@ import {
 // import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+interface LabelTranslationsProperties {
+
+    firstPage?: string;
+
+    previousPage?: string;
+
+    nextPage?: string;
+
+    lastPage?: string;
+
+}
+
 
 @Component({
     selector: 'lib-page-navigator',
     templateUrl: './template.html',
-    styleUrls: ['./style.sass']
+    styleUrls: ['./style.styl']
 })
 export class PageNavigatorComponent
        implements
@@ -32,7 +44,7 @@ export class PageNavigatorComponent
 
     @Input() queryParamPropertyName: string;
 
-    @Input() labelTranslations: Object;
+    @Input() labelTranslations: LabelTranslationsProperties;
 
     @Input() enablePageNumberInputBox: boolean;
 
@@ -81,10 +93,10 @@ export class PageNavigatorComponent
 
     private queryParamsSubscription: Subscription;
 
-    private _pageNumberInputBox: ElementRef;
-    @ViewChild('pageNumberInputBox')
-    private set pageNumberInputBox(value: any) {
-        this._pageNumberInputBox = value;
+    private pageNumberInputBox: ElementRef<HTMLInputElement>;
+    @ViewChild('pageNumberInputBox', {static: true})
+    private set _pageNumberInputBox(value: any) {
+        this.pageNumberInputBox = value;
 
         if (value) {
             this.resizePageNumberInputBoxWidth();
@@ -131,10 +143,9 @@ export class PageNavigatorComponent
         this.enablePageNumberInputBox = this.enablePageNumberInputBox || false;
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(
-            (params: Object) => {
+            (params: object) => {
                 if (params.hasOwnProperty(this.queryParamPropertyName)) {
-                    this.currentPageNumber = Number
-                        .parseInt(params[this.queryParamPropertyName]);
+                    this.currentPageNumber = parseInt(params[this.queryParamPropertyName], 10);
                     this.changePage.emit(this.currentPageNumber);
                 }
             }
@@ -186,9 +197,9 @@ export class PageNavigatorComponent
 
     navigateTo(pageNumber: number) {
         const
-            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement;
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
-        this.bondedPageNumber = Number.parseInt(`${pageNumber}`);
+        this.bondedPageNumber = parseInt(`${pageNumber}`, 10);
         this.currentPageNumber = this.bondedPageNumber;
 
         if (this.queryParamPropertyName) {
@@ -227,17 +238,19 @@ export class PageNavigatorComponent
 
     onMouseOver() {
         const
-            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement;
+            pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
         pageNumberInputBox.focus();
     }
 
     resizePageNumberInputBoxWidth() {
-        const
-            pageNumberInputBox: HTMLInputElement = this._pageNumberInputBox.nativeElement,
-            computedStyle = window.getComputedStyle(pageNumberInputBox),
-            pageNumberInputBoxLength: number = pageNumberInputBox.value.length,
-            minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
+        const pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
+
+        const computedStyle = window.getComputedStyle(pageNumberInputBox);
+
+        const pageNumberInputBoxLength: number = pageNumberInputBox.value.length;
+
+        const minimalWidth: number = Number.parseFloat(computedStyle.borderLeftWidth) +
                 Number.parseFloat(computedStyle.paddingLeft) +
                 Number.parseFloat(computedStyle.borderRightWidth) +
                 Number.parseFloat(computedStyle.paddingRight);
@@ -266,9 +279,9 @@ export class PageNavigatorComponent
         this.maxlength = `${this._totalPages}`.length;
     }
 
-    private getQueryParamsStatement(pageNumber: number): Object {
+    private getQueryParamsStatement(pageNumber: number): object {
         const
-            statement: Object = {};
+            statement: object = {};
 
         statement[this.queryParamPropertyName] = pageNumber;
 
@@ -278,26 +291,26 @@ export class PageNavigatorComponent
     private resolveLabelTranslations() {
         if (Object.keys(this.labelTranslations).length) {
             if (this.labelTranslations.hasOwnProperty('firstPage')) {
-                this.firstPageLabel = this.labelTranslations['firstPage'];
+                this.firstPageLabel = this.labelTranslations.firstPage;
             } else {
                 this.firstPageLabel = 'first';
             }
 
             if (this.labelTranslations.hasOwnProperty('previousPage')) {
                 this.previousPageLabel = this
-                    .labelTranslations['previousPage'];
+                    .labelTranslations.previousPage;
             } else {
                 this.previousPageLabel = 'previous';
             }
 
             if (this.labelTranslations.hasOwnProperty('nextPage')) {
-                this.nextPageLabel = this.labelTranslations['nextPage'];
+                this.nextPageLabel = this.labelTranslations.nextPage;
             } else {
                 this.nextPageLabel = 'next';
             }
 
             if (this.labelTranslations.hasOwnProperty('lastPage')) {
-                this.lastPageLabel = this.labelTranslations['lastPage'];
+                this.lastPageLabel = this.labelTranslations.lastPage;
             } else {
                 this.lastPageLabel = 'last';
             }

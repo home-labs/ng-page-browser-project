@@ -1,8 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ng-page-navigator",
-  "deleteDestPath": false,
+  "dest": "../../dist/@rplaurindo/ng-page-navigator",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "index.ts"
   }
 }
