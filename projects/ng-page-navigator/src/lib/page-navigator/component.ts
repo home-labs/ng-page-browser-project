@@ -89,12 +89,13 @@ export class PageNavigatorComponent
 
     hiddenPageNumberInputBox: boolean;
 
+    // tslint:disable-next-line: variable-name
     private _totalPages: number;
 
     private queryParamsSubscription: Subscription;
 
-    private pageNumberInputBox: ElementRef<HTMLInputElement>;
-    @ViewChild('pageNumberInputBox', {static: true})
+    private pageNumberInputBox: ElementRef;
+    @ViewChild('pageNumberInputBox', { static: false })
     private set _pageNumberInputBox(value: any) {
         this.pageNumberInputBox = value;
 

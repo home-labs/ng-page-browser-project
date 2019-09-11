@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { PageNavigatorComponent } from './page-navigator/component';
 
@@ -8,7 +9,8 @@ import { PageNavigatorComponent } from './page-navigator/component';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        RouterModule.forRoot([])
     ],
     declarations: [
         PageNavigatorComponent

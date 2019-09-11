@@ -4,7 +4,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { NgPageNavigator } from '@rplaurindo/ng-page-navigator';
+import { PageNavigatorComponent } from '@rplaurindo/ng-page-navigator';
 
 
 @Component({
@@ -14,7 +14,8 @@ import { NgPageNavigator } from '@rplaurindo/ng-page-navigator';
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('pageNavigator', {static: true}) private pageNavigator: NgPageNavigator.PageNavigatorComponent;
+    // @ViewChild('pageNavigator', { static: true }) private pageNavigator: NgPageNavigator.PageNavigatorComponent;
+    @ViewChild('pageNavigator', { static: true }) private pageNavigator: PageNavigatorComponent;
 
     title = 'app';
 
