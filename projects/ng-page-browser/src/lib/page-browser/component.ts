@@ -35,7 +35,7 @@ interface LabelTranslationsProperties {
 
 
 @Component({
-    selector: 'lib-page-navigator',
+    selector: 'lib-page-browser',
     templateUrl: './template.html',
     styleUrls: ['./style.styl']
 })

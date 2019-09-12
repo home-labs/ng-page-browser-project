@@ -4,7 +4,7 @@
     Navigated to: {{ currentPageNumber }}
 
       <!-- [queryParamPropertyName]="'pagina'" -->
-    <!-- <lib-page-navigator
+    <!-- <lib-page-browser
       #pageNavigator
       [labelTranslations]="{
         firstPage: '⏮',
@@ -14,9 +14,9 @@
       }"
       [enablePageNumberInputBox]="true"
       (changePage)="onChangePage($event)"
-    ></lib-page-navigator> -->
+    ></lib-page-browser> -->
 
-    <lib-page-navigator
+    <lib-page-browser
       #pageNavigator
       [labelTranslations]="{
         firstPage: 'first',
@@ -26,7 +26,7 @@
       }"
       [enablePageNumberInputBox]="enablePageNumberInputBox"
       (changePage)="onChangePage($event)"
-    ></lib-page-navigator>
+    ></lib-page-browser>
 
   </section>
 </main>
