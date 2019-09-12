@@ -1,21 +1,16 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { NgPageNavigatorModule } from '@rplaurindo/ng-page-navigator';
-
-
 @NgModule({
-    imports: [
-        BrowserModule,
-
-        NgPageNavigatorModule
-    ],
-    declarations: [
-        AppComponent
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

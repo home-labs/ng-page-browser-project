@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/@rplaurindo/ng-page-navigator",
+  "dest": "../../dist/@rplaurindo/ng-page-browser",
   "lib": {
     "entryFile": "index.ts"
   }

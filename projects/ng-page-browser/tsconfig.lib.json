@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/@rplaurindo/ng-page-navigator",
+    "outDir": "../../out-tsc/lib",
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
@@ -12,7 +12,12 @@
     ]
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
   },
   "exclude": [
     "src/test.ts",

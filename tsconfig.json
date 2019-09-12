@@ -10,7 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "@rplaurindo/ng-page-navigator": [
-        "dist/@rplaurindo/ng-page-navigator"
+      "@rplaurindo/ng-page-browser": [
+        "dist/@rplaurindo/ng-page-browser"
       ],
-      "@rplaurindo/ng-page-navigator/*": [
-        "dist/@rplaurindo/ng-page-navigator/*"
+      "@rplaurindo/ng-page-browser/*": [
+        "dist/@rplaurindo/ng-page-browser/*"
       ]
     }
   },
