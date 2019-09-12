@@ -1,24 +1,82 @@
 # NgPageBrowser
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.5.
+## Requirements
 
-## Code scaffolding
+>- Angular 5 or higher.
 
-Run `ng generate component component-name --project ng-page-browser` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-page-browser`.
-> Note: Don't forget to add `--project ng-page-browser` or else it will be added to the default project in your `angular.json` file. 
+## Installing
 
-## Build
+	$ npm i ng-page-browser --save
 
-Run `ng build ng-page-browser` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Usage
 
-## Publishing
+Include the module into ```imports``` metadata key of ```NgModule``` decorator in your application, importing ```NgPageBrowserModule``` from `ng-page-browser`, like that.
 
-After building your library with `ng build ng-page-browser`, go to the dist folder `cd dist/ng-page-browser` and run `npm publish`.
+```typescript
+import { NgPageBrowserModule } from 'ng-page-browser';
 
-## Running unit tests
+@NgModule({
+    imports: [
+        NgPageBrowserModule
+    ]
+})
+export class MyModule() { }
+```
 
-Run `ng test ng-page-browser` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Data and Event Binding
 
-## Further help
+```html
+<lib-page-browser
+  #pageBrowser
+  [labelTranslations]="{
+    firstPage: 'First',
+    previousPage: '«',
+    nextPage: '»',
+    lastPage: 'Last'
+  }"
+  [enablePageNumberInputBox]="true || false"
+  (changePage)="onChangePage($event)"
+></lib-page-browser>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+So...
+
+```typescript
+import {
+    Component,
+    OnInit,
+    ViewChild
+} from  '@angular/core';
+
+import { PageBrowserComponent } from 'ng-page-browser';
+
+
+@Component({
+    // ...
+})
+export class MyComponent implements OnInit {
+
+    @ViewChild('pageBrowser') private  pageBrowser: PageBrowserComponent;
+
+    constructor() {
+        const
+            // example to assign totalPages belatedly
+            interval = setInterval(
+                () => {
+                    this.pageBrowser.totalPages = 100;
+                    clearInterval(interval);
+                }, 2000
+            );
+    }
+
+	onChangePage(pageNumber:  number) {
+	    
+	}
+
+}
+```
+
+**Note.**: 
+>- don't use this component nested a HTML tag block with `*ngIf` directive, or it'll not work;
+>- `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just clicking on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable the page number input box you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box.
+
