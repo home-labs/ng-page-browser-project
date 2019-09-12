@@ -14,7 +14,7 @@ import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('pageNavigator', { static: false }) private pageNavigator: PageBrowserComponent;
+    @ViewChild('pageBrowser', { static: false }) private pageBrowser: PageBrowserComponent;
 
     title = 'app';
 
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         const
             interval = setInterval(
                 () => {
-                    this.pageNavigator.totalPages = 1110;
+                    this.pageBrowser.totalPages = 1110;
                     console.log('function called after interval');
                     clearInterval(interval);
                 }, 2000

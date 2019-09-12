@@ -45,13 +45,15 @@ export class PageBrowserComponent
     AfterViewInit,
     OnDestroy {
 
-    @Input() queryParamPropertyName: string;
-
     @Input() labelTranslations: LabelTranslationsProperties;
 
     @Input() enablePageNumberInputBox: boolean;
 
     @Input() widthGrowthToggleFactor: number;
+
+    @Input() queryParamPropertyName: string;
+
+    @Input() collection: any[];
 
     @Output() changePage: EventEmitter<number>;
 
