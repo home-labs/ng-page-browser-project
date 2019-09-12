@@ -6,14 +6,14 @@
 
 ## Installing
 
-	$ npm i ng-page-browser --save
+	$ npm i @rplaurindo/ng-page-browser --save
 
 ## Usage
 
-Include the module into ```imports``` metadata key of ```NgModule``` decorator in your application, importing ```NgPageBrowserModule``` from `ng-page-browser`, like that.
+Include the module into ```imports``` metadata key of ```NgModule``` decorator in your application, importing ```NgPageBrowserModule``` from `@rplaurindo/ng-page-browser`, like that.
 
 ```typescript
-import { NgPageBrowserModule } from 'ng-page-browser';
+import { NgPageBrowserModule } from '@rplaurindo/ng-page-browser';
 
 @NgModule({
     imports: [
@@ -48,7 +48,7 @@ import {
     ViewChild
 } from  '@angular/core';
 
-import { PageBrowserComponent } from 'ng-page-browser';
+import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
 
 
 @Component({
