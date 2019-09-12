@@ -10,7 +10,7 @@
 
 ## Usage
 
-Include the module into ```imports``` metadata key of ```NgModule``` decorator in your application, importing ```NgPageBrowserModule``` from `@rplaurindo/ng-page-browser`, like that.
+Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageBrowserModule` from `@rplaurindo/ng-page-browser`, like that.
 
 ```typescript
 import { NgPageBrowserModule } from '@rplaurindo/ng-page-browser';
