@@ -21,6 +21,9 @@ import {
 
 import { Subscription } from 'rxjs';
 
+import { Pagination } from '../pagination';
+
+
 interface LabelTranslationsProperties {
 
     firstPage?: string;
@@ -40,10 +43,11 @@ interface LabelTranslationsProperties {
     styleUrls: ['./style.styl']
 })
 export class PageBrowserComponent
+
     implements
-    OnInit,
-    AfterViewInit,
-    OnDestroy {
+        OnInit,
+        AfterViewInit,
+        OnDestroy {
 
     @Input() labelTranslations: LabelTranslationsProperties;
 
