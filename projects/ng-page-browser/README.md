@@ -107,5 +107,6 @@ export class AppComponent implements OnInit {
 **Note.**: 
 >- don't use this component nested a HTML tag block with `*ngIf` directive if you is using an `Angular` last than 8 version, or it'll not work;
 >- `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just clicking on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable the page number input box you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box;
->- You can use the `getPage` pipe passing the page number and the limit to page inline a collection `(| getPage:pageNumberVariable:limitVariable)`.
+>- You can use the `getPage` pipe passing the page number and the limit to page inline a collection `(... | getPage:pageNumberVariable:limitVariable)`.
+
 
