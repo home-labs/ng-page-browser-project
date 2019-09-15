@@ -40,7 +40,8 @@ export class AppComponent implements OnInit {
                             , property2: `property2 value ${i}`
                         });
                     }
-                    console.log('function called after interval');
+
+                    console.log('function called after an interval');
                     clearInterval(interval);
                 }, 2000
             );
