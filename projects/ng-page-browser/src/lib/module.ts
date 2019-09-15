@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { PageBrowserComponent } from './page-browser/component';
 
-import { GetPagePipe } from './get-page/pipe';
+import { GetPagePerPipe } from './get-page-per/pipe';
 
 
 @NgModule({
@@ -16,11 +16,11 @@ import { GetPagePipe } from './get-page/pipe';
     ],
     declarations: [
         PageBrowserComponent
-        , GetPagePipe
+        , GetPagePerPipe
     ],
     exports: [
         PageBrowserComponent
-        , GetPagePipe
+        , GetPagePerPipe
     ]
 })
 export class NgPageBrowserModule { }

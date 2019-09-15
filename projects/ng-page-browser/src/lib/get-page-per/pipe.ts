@@ -7,9 +7,9 @@ import { Pagination } from '../pagination';
 
 
 @Pipe({
-    name: 'getPage'
+    name: 'getPagePer'
 })
-export class GetPagePipe implements PipeTransform {
+export class GetPagePerPipe implements PipeTransform {
 
     private pagination: Pagination<any>;
 
