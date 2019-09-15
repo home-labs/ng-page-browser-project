@@ -21,8 +21,6 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { Pagination } from '../pagination';
-
 
 interface LabelTranslationsProperties {
 
@@ -56,8 +54,6 @@ export class PageBrowserComponent
     @Input() widthGrowthToggleFactor: number;
 
     @Input() queryParamPropertyName: string;
-
-    @Input() collection: any[];
 
     @Output() changePage: EventEmitter<number>;
 
