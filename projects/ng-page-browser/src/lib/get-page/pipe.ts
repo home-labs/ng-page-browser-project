@@ -19,17 +19,13 @@ export class GetPagePipe implements PipeTransform {
 
     transform(collection: any[], pageNumber: number, limit: number): any[] {
 
-        if (collection) {
-            if (!this.pagination) {
-                this.pagination = new Pagination(collection, limit);
-            } else {
-                this.pagination.setLimit(limit);
-            }
-
-            return this.pagination.getPage(pageNumber);
+        if (!this.pagination) {
+            this.pagination = new Pagination(collection, limit);
+        } else {
+            this.pagination.setLimit(limit);
         }
 
-        return collection;
+        return this.pagination.getPage(pageNumber);
 
     }
 

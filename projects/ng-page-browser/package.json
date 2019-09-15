@@ -1,6 +1,6 @@
 {
   "name": "@rplaurindo/ng-page-browser",
-  "version": "1.0.1-rc.2",
+  "version": "1.1.0-rc.1",
   "peerDependencies": {
     "@angular/common": ">= 5"
     , "@angular/core": ">= 5"

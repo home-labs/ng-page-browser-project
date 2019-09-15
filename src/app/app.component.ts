@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
             interval = setInterval(
                 () => {
                     this.pageBrowser.totalPages = 1110;
-                    for (let i = 1; i < this.pageBrowser.totalPages; i++) {
+                    for (let i = 1; i <= this.pageBrowser.totalPages * this.limit; i++) {
                         this.collection.push({
                             property1: `property1 value ${i}`
                             , property2: `property2 value ${i}`
@@ -52,7 +52,6 @@ export class AppComponent implements OnInit {
     }
 
     onChangePage(pageNumber: number) {
-        console.log(pageNumber);
         this.pageNumber = pageNumber;
     }
 

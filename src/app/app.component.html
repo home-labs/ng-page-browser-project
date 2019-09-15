@@ -1,7 +1,7 @@
 <main>
   <section>
 
-    <table>
+    <table >
 
       <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody *ngIf="collection.length">
         <tr *ngFor="let item of collection | getPage:pageNumber:limit">
           <td>
             {{ item.property1 }}
