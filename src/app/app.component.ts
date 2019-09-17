@@ -16,24 +16,36 @@ export class AppComponent implements OnInit {
 
     @ViewChild('pageBrowser', { static: false }) private pageBrowser: PageBrowserComponent;
 
-    title = 'app';
-
-    currentPageNumber: number;
-
     enablePageNumberInputBox: boolean;
 
+    collection: object[];
+
+    pageNumber: number;
+
+    limit: number;
+
     constructor() {
-        this.currentPageNumber = 1;
         this.enablePageNumberInputBox = true;
+        this.collection = [];
+        this.pageNumber = 1;
+        this.limit = 5;
 
         const
             interval = setInterval(
                 () => {
                     this.pageBrowser.totalPages = 1110;
-                    console.log('function called after interval');
+                    for (let i = 1; i <= this.pageBrowser.totalPages * this.limit; i++) {
+                        this.collection.push({
+                            property1: `property1 value ${i}`
+                            , property2: `property2 value ${i}`
+                        });
+                    }
+
+                    console.log('function called after an interval');
                     clearInterval(interval);
                 }, 2000
             );
+
     }
 
     ngOnInit() {
@@ -41,7 +53,7 @@ export class AppComponent implements OnInit {
     }
 
     onChangePage(pageNumber: number) {
-        this.currentPageNumber = pageNumber;
+        this.pageNumber = pageNumber;
     }
 
 }

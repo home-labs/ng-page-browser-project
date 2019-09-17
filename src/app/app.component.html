@@ -1,7 +1,27 @@
 <main>
   <section>
 
-    Navigated to: {{ currentPageNumber }}
+    <table >
+
+      <thead>
+        <tr>
+          <th>PROPERTY 1</th>
+          <th>PROPERTY 2</th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="collection.length">
+        <tr *ngFor="let item of collection | getPagePer:pageNumber:limit">
+          <td>
+            {{ item.property1 }}
+          </td>
+          <td>
+            {{ item.property2 }}
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
 
       <!-- [queryParamPropertyName]="'pagina'" -->
     <!-- <lib-page-browser

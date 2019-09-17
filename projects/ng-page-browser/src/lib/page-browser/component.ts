@@ -21,6 +21,7 @@ import {
 
 import { Subscription } from 'rxjs';
 
+
 interface LabelTranslationsProperties {
 
     firstPage?: string;
@@ -40,10 +41,11 @@ interface LabelTranslationsProperties {
     styleUrls: ['./style.styl']
 })
 export class PageBrowserComponent
+
     implements
-    OnInit,
-    AfterViewInit,
-    OnDestroy {
+        OnInit,
+        AfterViewInit,
+        OnDestroy {
 
     @Input() labelTranslations: LabelTranslationsProperties;
 
@@ -52,8 +54,6 @@ export class PageBrowserComponent
     @Input() widthGrowthToggleFactor: number;
 
     @Input() queryParamPropertyName: string;
-
-    @Input() collection: any[];
 
     @Output() changePage: EventEmitter<number>;
 
