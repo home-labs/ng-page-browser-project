@@ -22,7 +22,7 @@ import {
 import { Subscription } from 'rxjs';
 
 
-interface LabelTranslationsProperties {
+interface ILabelTranslationsProperties {
 
     firstPage?: string;
 
@@ -47,7 +47,7 @@ export class PageBrowserComponent
         AfterViewInit,
         OnDestroy {
 
-    @Input() labelTranslations: LabelTranslationsProperties;
+    @Input() labelTranslations: ILabelTranslationsProperties;
 
     @Input() enablePageNumberInputBox: boolean;
 
