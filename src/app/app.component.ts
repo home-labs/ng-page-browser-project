@@ -6,6 +6,8 @@ import {
 
 import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
 
+import { NgPageBrowser } from '@rplaurindo/ng-page-browser';
+
 
 @Component({
     selector: 'app-root',
@@ -33,8 +35,11 @@ export class AppComponent implements OnInit {
         const
             interval = setInterval(
                 () => {
-                    this.pageBrowser.totalPages = 1110;
-                    for (let i = 1; i <= this.pageBrowser.totalPages * this.limit; i++) {
+                    const count = 10000;
+
+                    this.pageBrowser.totalPages = NgPageBrowser.Pagination.calculatesTotalPages(count, this.limit);
+
+                    for (let i = 1; i <= count; i++) {
                         this.collection.push({
                             property1: `property1 value ${i}`
                             , property2: `property2 value ${i}`

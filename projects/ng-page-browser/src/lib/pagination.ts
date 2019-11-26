@@ -21,7 +21,7 @@ export class Pagination<T> {
         this.page = [];
     }
 
-    static calculatesOffset(limit: number, pageNumber: number = 1, count: number): number {
+    private static calculatesOffset(limit: number, pageNumber: number = 1, count: number): number {
         let totalPages: number;
 
         let offset: number;
@@ -78,25 +78,18 @@ export class Pagination<T> {
         this.limit = value;
     }
 
-    getPage(value: number): T[] {
-        this.resolvesPage(value);
-        return this.page;
-    }
-
-    getTotalPages(): number {
-        return this.totalPages;
-    }
-
-    private resolvesPage(pageNumber: number) {
+    getPage(pageNumber: number): T[] {
         let offset: number;
 
         if (!this.currentPageNumber
             || pageNumber !== this.currentPageNumber
-            ) {
-                this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
-                offset = Pagination.calculatesOffset(this.limit, this.currentPageNumber, this.count);
-                this.page = this.collection.slice(offset, offset + this.limit);
-            }
+        ) {
+            this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
+            offset = Pagination.calculatesOffset(this.limit, this.currentPageNumber, this.count);
+            this.page = this.collection.slice(offset, offset + this.limit);
+        }
+
+        return this.page;
     }
 
 }
