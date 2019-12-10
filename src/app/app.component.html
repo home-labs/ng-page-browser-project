@@ -10,8 +10,10 @@
         </tr>
       </thead>
 
-      <tbody *ngIf="collection.length">
-        <tr *ngFor="let item of collection | getPagePer:pageNumber:limit">
+      <!-- <tbody *ngIf="collection.length"> -->
+      <tbody>
+        <!-- <tr *ngFor="let item of collectionPromise | getPagePer:pageNumber:limit"> -->
+        <tr *ngFor="let item of collectionPromise | async">
           <td>
             {{ item.property1 }}
           </td>
