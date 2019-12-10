@@ -4,9 +4,11 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
+// import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
+import { PageBrowserComponent } from 'projects/ng-page-browser';
 
-import { NgPageBrowser } from '@rplaurindo/ng-page-browser';
+// import { NgPageBrowser } from '@rplaurindo/ng-page-browser';
+import { NgPageBrowser } from 'projects/ng-page-browser';
 
 
 @Component({
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit {
 
     limit: number;
 
-    private page: object[];
+    private collection: object[];
 
     private count: number;
 
@@ -38,20 +40,23 @@ export class AppComponent implements OnInit {
         this.limit = 5;
     }
 
-    ngOnInit() {
-        const collection: object[] = [];
+    async ngOnInit() {
+        this.collection = [];
         this.count = 10000;
 
         for (let i = 1; i <= this.count; i++) {
-            collection.push({
+            this.collection.push({
                 property1: `property1 value ${i}`
                 , property2: `property2 value ${i}`
             });
         }
 
-        this.collectionPagination = new NgPageBrowser.Pagination(collection, this.limit);
+        this.collectionPagination = new NgPageBrowser.Pagination(this.collection, this.limit);
 
-        this.getPage();
+        await this.getPage();
+
+        this.pageBrowser.totalPages = NgPageBrowser.Pagination
+            .calculatesTotalPages(this.count, this.limit);
     }
 
     onChangePage(pageNumber: number) {
@@ -60,18 +65,13 @@ export class AppComponent implements OnInit {
         this.getPage();
     }
 
-    getPage() {
+    async getPage(): Promise<object[]> {
         this.collectionPromise = new Promise(
             (accomplish: (collection: object[]) => void) => {
 
-                const interval = setInterval(
+                const interval = setTimeout(
                     () => {
-                        this.page = this.collectionPagination.getPage(this.pageNumber);
-
-                        this.pageBrowser.totalPages = NgPageBrowser.Pagination
-                            .calculatesTotalPages(this.count, this.limit);
-
-                        accomplish(this.page);
+                        accomplish(this.collection);
 
                         console.log('function called after an interval');
                         clearInterval(interval);
@@ -80,6 +80,8 @@ export class AppComponent implements OnInit {
 
             }
         );
+
+        return this.collectionPromise;
     }
 
 }
