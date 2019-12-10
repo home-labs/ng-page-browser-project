@@ -20,11 +20,7 @@ export class AppComponent implements OnInit {
 
     @ViewChild('pageBrowser', { static: true }) private pageBrowser: PageBrowserComponent;
 
-    enablePageNumberInputBox: boolean;
-
     collectionPromise: Promise<object[]>;
-
-    collectionPagination: NgPageBrowser.Pagination<object>;
 
     pageNumber: number;
 
@@ -35,7 +31,6 @@ export class AppComponent implements OnInit {
     private count: number;
 
     constructor() {
-        this.enablePageNumberInputBox = true;
         this.pageNumber = 1;
         this.limit = 5;
     }
@@ -51,8 +46,6 @@ export class AppComponent implements OnInit {
             });
         }
 
-        this.collectionPagination = new NgPageBrowser.Pagination(this.collection, this.limit);
-
         await this.getPage();
 
         this.pageBrowser.totalPages = NgPageBrowser.Pagination
@@ -61,8 +54,6 @@ export class AppComponent implements OnInit {
 
     onChangePage(pageNumber: number) {
         this.pageNumber = pageNumber;
-
-        this.getPage();
     }
 
     async getPage(): Promise<object[]> {
