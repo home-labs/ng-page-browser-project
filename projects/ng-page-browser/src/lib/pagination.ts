@@ -44,10 +44,10 @@ export class Pagination<T> {
         return offset;
     }
 
-    static calculatesTotalPages(count: number, limit: number): number {
+    static calculatesTotalPages(count: number, limit?: number): number {
         limit = Pagination.resolvesLimit(count, limit);
 
-        if (count > 0 && limit > 0) {
+        if (limit && count > 0 && limit > 0) {
             return Math.ceil(count / limit);
         }
 
