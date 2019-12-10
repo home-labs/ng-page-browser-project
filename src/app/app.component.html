@@ -11,7 +11,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let item of collectionPromise | async | getPagePer:pageNumber:limit">
+        <tr *ngFor="let item of collectionPromise | async | getPagePer:limit:pageNumber">
           <td>
             {{ item.property1 }}
           </td>

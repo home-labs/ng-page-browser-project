@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
     constructor() {
         this.pageNumber = 1;
-        this.limit = 5;
+        // this.limit = 5;
     }
 
     async ngOnInit() {

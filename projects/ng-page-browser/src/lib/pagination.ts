@@ -21,7 +21,17 @@ export class Pagination<T> {
         this.page = [];
     }
 
-    private static calculatesOffset(limit: number, pageNumber: number = 1, count: number): number {
+    static calculatesTotalPages(count: number, limit?: number): number {
+        limit = Pagination.resolvesLimit(count, limit);
+
+        if (limit > 0 && count > 0) {
+            return Math.ceil(count / limit);
+        }
+
+        return 1;
+    }
+
+    private static calculatesOffset(count: number, limit: number = 0, pageNumber: number = 1): number {
         let totalPages: number;
 
         let offset: number;
@@ -31,33 +41,23 @@ export class Pagination<T> {
             totalPages = Pagination.calculatesTotalPages(count, limit);
             // cause' of these filters isn't possible the offset exceed maximum
             pageNumber = Pagination.resolvesPageNumber(pageNumber, totalPages);
-        } else if (pageNumber < 1) {
+        } else if (pageNumber <= 1) {
             pageNumber = 1;
         }
 
         offset = limit * (pageNumber - 1);
 
-        if (offset < 0) {
+        if (offset <= 0) {
             offset = 0;
         }
 
         return offset;
     }
 
-    static calculatesTotalPages(count: number, limit?: number): number {
-        limit = Pagination.resolvesLimit(count, limit);
-
-        if (limit && count > 0 && limit > 0) {
-            return Math.ceil(count / limit);
-        }
-
-        return 1;
-    }
-
-    private static resolvesLimit(count: number, limit: number): number {
+    private static resolvesLimit(count: number, limit: number = 0): number {
         if (count === 0) {
             return count;
-        } else if (limit < 0) {
+        } else if (limit <= 0) {
             return 0;
         }
 
@@ -67,7 +67,7 @@ export class Pagination<T> {
     private static resolvesPageNumber(pageNumber: number, totalPages: number): number {
         if (pageNumber > totalPages) {
             return totalPages;
-        } else if (pageNumber < 1) {
+        } else if (pageNumber <= 1) {
             return 1;
         }
 
@@ -81,13 +81,15 @@ export class Pagination<T> {
     getPage(pageNumber: number): T[] {
         let offset: number;
 
-        if (!this.currentPageNumber
-            || pageNumber !== this.currentPageNumber
-        ) {
-            this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
-            offset = Pagination.calculatesOffset(this.limit, this.currentPageNumber, this.count);
-            this.page = this.collection.slice(offset, offset + this.limit);
-
+        if (this.limit) {
+            if (!this.currentPageNumber
+                || pageNumber !== this.currentPageNumber) {
+                this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
+                offset = Pagination.calculatesOffset(this.count, this.limit, this.currentPageNumber);
+                this.page = this.collection.slice(offset, offset + this.limit);
+            }
+        } else {
+            this.page = [...this.collection];
         }
 
         return this.page;
