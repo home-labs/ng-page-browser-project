@@ -2,18 +2,19 @@
 
 ## Requirements
 
->- Angular 5 or higher.
+>- @angular/common, @angular/core, @angular/forms and @angular/router 5 or higher;
+>- rxjs 5 or higher.
 
 ## Installing
 
-	$ npm i @rplaurindo/ng-page-browser --save
+	$ npm i @actjs.on/ng-page-browser --save
 
 ## Usage
 
-Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageBrowserModule` from `@rplaurindo/ng-page-browser`, like that.
+Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageBrowserModule` from `@actjs.on/ng-page-browser`, like that.
 
 ```typescript
-import { NgPageBrowserModule } from '@rplaurindo/ng-page-browser';
+import { NgPageBrowserModule } from '@actjs.on/ng-page-browser';
 
 @NgModule({
     imports: [
@@ -49,7 +50,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { PageBrowserComponent } from '@rplaurindo/ng-page-browser';
+import { PageBrowserComponent } from '@actjs.on/ng-page-browser';
 
 
 @Component({
@@ -108,5 +109,3 @@ export class AppComponent implements OnInit {
 >- don't use this component nested a HTML tag block with `*ngIf` directive if you is using an `Angular` last than 8 version, or it'll not work;
 >- `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just clicking on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable the page number input box you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box;
 >- You can use the `getPagePer` pipe passing the page number and the limit to page inline a collection `(... | getPagePer:pageNumberVariable:limitVariable)`.
-
-
