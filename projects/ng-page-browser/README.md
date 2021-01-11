@@ -3,7 +3,7 @@
 <blockquote>
 <ul>
 <li>@angular/common, @angular/core, @angular/forms and @angular/router 5 or higher;</li>
-<li>rxjs 5 or higher.</li>
+<li>rxjs 5 or higher</li>
 </ul>
 </blockquote>
 <h2 id="installing">Installing</h2>
