@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-// import { NgPageBrowserModule } from '@rplaurindo/ng-page-browser';
-import { NgPageBrowserModule } from 'projects/ng-page-browser';
+import { NgPageBrowserModule } from '@actjs.on/ng-page-browser';
+// import { NgPageBrowserModule } from 'projects/ng-page-browser';
 
 
 @NgModule({

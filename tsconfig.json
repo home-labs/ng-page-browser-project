@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "@rplaurindo/ng-page-browser": [
-        "dist/@rplaurindo/ng-page-browser"
+      "@actjs.on/ng-page-browser": [
+        "dist/@actjs.on/ng-page-browser"
       ],
-      "@rplaurindo/ng-page-browser/*": [
-        "dist/@rplaurindo/ng-page-browser/*"
+      "@actjs.on/ng-page-browser/*": [
+        "dist/@actjs.on/ng-page-browser/*"
       ]
     }
   },

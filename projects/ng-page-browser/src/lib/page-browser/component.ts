@@ -76,25 +76,22 @@ export class PageBrowserComponent
 
     cachedPageNumber: number;
 
-    bondedPageNumber: number;
+    protected bondedPageNumber: number;
 
-    maxlength: number;
+    protected maxlength: number;
 
-    firstPageLabel: string;
+    protected firstPageLabel: string;
 
-    previousPageLabel: string;
+    protected previousPageLabel: string;
 
-    nextPageLabel: string;
+    protected nextPageLabel: string;
 
-    lastPageLabel: string;
+    protected lastPageLabel: string;
 
-    showCurrentPageNumberDisplay: boolean;
+    protected showCurrentPageNumberDisplay: boolean;
 
-    showPageNumberInputBox: boolean;
+    protected hiddenPageNumberInputBox: boolean;
 
-    hiddenPageNumberInputBox: boolean;
-
-    // tslint:disable-next-line: variable-name
     private _totalPages: number;
 
     private queryParamsSubscription: Subscription;
@@ -119,7 +116,6 @@ export class PageBrowserComponent
         this.changePage = new EventEmitter();
         this.showCurrentPageNumberDisplay = true;
         this.hiddenPageNumberInputBox = true;
-        this.showPageNumberInputBox = false;
 
         this.currentPageNumber = 1;
         this.bondedPageNumber = 1;
@@ -167,11 +163,11 @@ export class PageBrowserComponent
         }
     }
 
-    isOnFrontPage(): boolean {
+    protected isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
     }
 
-    isOnLastPage(): boolean {
+    protected isOnLastPage(): boolean {
         return this.currentPageNumber === this._totalPages;
     }
 
@@ -188,7 +184,7 @@ export class PageBrowserComponent
         return this.currentPageNumber;
     }
 
-    getNextPage(): number {
+    protected getNextPage(): number {
         if (this.bondedPageNumber && this.bondedPageNumber > 0) {
             if (this.bondedPageNumber !== this.currentPageNumber
                 && this.bondedPageNumber > this.currentPageNumber) {
@@ -201,7 +197,7 @@ export class PageBrowserComponent
         return this.currentPageNumber;
     }
 
-    navigateTo(pageNumber: number) {
+    protected navigateTo(pageNumber: number) {
         const
             pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
@@ -226,30 +222,28 @@ export class PageBrowserComponent
 
     }
 
-    enablesCurrentPageNumberDisplay() {
+    protected enablesCurrentPageNumberDisplay() {
         if (this.enablePageNumberInputBox) {
-            this.showPageNumberInputBox = false;
             this.showCurrentPageNumberDisplay = true;
             this.hiddenPageNumberInputBox = true;
         }
     }
 
-    enablesPageNumberInputBox() {
+    protected enablesPageNumberInputBox() {
         if (this.enablePageNumberInputBox) {
-            this.showPageNumberInputBox = true;
             this.showCurrentPageNumberDisplay = false;
             this.hiddenPageNumberInputBox = false;
         }
     }
 
-    onMouseOver() {
+    protected onMouseOver() {
         const
             pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
         pageNumberInputBox.focus();
     }
 
-    resizePageNumberInputBoxWidth() {
+    protected resizePageNumberInputBoxWidth() {
         const pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
         const computedStyle = window.getComputedStyle(pageNumberInputBox);
@@ -328,11 +322,11 @@ export class PageBrowserComponent
         }
     }
 
-    private setMaxInputValidationMessage(input: HTMLInputElement) {
-        // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
+    // private setMaxInputValidationMessage(input: HTMLInputElement) {
+    //     // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
 
-        // const
-        //     ngFrom: NgForm = input.form;
-    }
+    //     // const
+    //     //     ngFrom: NgForm = input.form;
+    // }
 
 }
