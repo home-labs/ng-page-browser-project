@@ -24,13 +24,13 @@ import { Subscription } from 'rxjs';
 
 interface ILabelTranslationsProperties {
 
-    firstPage?: string;
+    firstPage?: string | HTMLElement;
 
-    previousPage?: string;
+    previousPage?: string | HTMLElement;
 
-    nextPage?: string;
+    nextPage?: string | HTMLElement;
 
-    lastPage?: string;
+    lastPage?: string | HTMLElement;
 
 }
 
@@ -51,9 +51,9 @@ export class PageBrowserComponent
 
     @Input() enablePageNumberInputBox: boolean;
 
-    @Input() widthGrowthToggleFactor: number;
-
     @Input() queryParamPropertyName: string;
+
+    @Input() widthGrowthToggleFactor: number;
 
     @Output() changePage: EventEmitter<number>;
 
@@ -80,13 +80,13 @@ export class PageBrowserComponent
 
     maxlength: number;
 
-    firstPageLabel: string;
+    firstPageLabel: string | HTMLElement;
 
-    previousPageLabel: string;
+    previousPageLabel: string | HTMLElement;
 
-    nextPageLabel: string;
+    nextPageLabel: string | HTMLElement;
 
-    lastPageLabel: string;
+    lastPageLabel: string | HTMLElement;
 
     showCurrentPageNumberDisplay: boolean;
 

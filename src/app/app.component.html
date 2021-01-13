@@ -36,7 +36,6 @@
       (changePage)="onChangePage($event)"
     ></lib-page-browser> -->
 
-      <!-- [queryParamPropertyName]="'pagina'" -->
     <lib-page-browser
       #pageBrowser
       [labelTranslations]="{
@@ -46,6 +45,7 @@
         lastPage: 'last'
       }"
       [enablePageNumberInputBox]="enablePageNumberInputBox"
+      [queryParamPropertyName]="'pagina'"
       (changePage)="onChangePage($event)"
     ></lib-page-browser>
 
