@@ -50,11 +50,12 @@ export class AppComponent implements OnInit {
             .calculatesTotalPages(this.count, this.limit);
     }
 
-    onChangePage(pageNumber: number) {
+    // protected for now it doesn't work when building the lib
+    protected onChangePage(pageNumber: number) {
         this.pageNumber = pageNumber;
     }
 
-    getPage(): Promise<object[]> {
+    private getPage(): Promise<object[]> {
         this.collectionPromise = new Promise(
             (accomplish: (collection: object[]) => void) => {
 

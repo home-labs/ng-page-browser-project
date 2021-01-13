@@ -76,21 +76,21 @@ export class PageBrowserComponent
 
     cachedPageNumber: number;
 
-    protected bondedPageNumber: number;
+    bondedPageNumber: number;
 
-    protected maxlength: number;
+    maxlength: number;
 
-    protected firstPageLabel: string;
+    firstPageLabel: string;
 
-    protected previousPageLabel: string;
+    previousPageLabel: string;
 
-    protected nextPageLabel: string;
+    nextPageLabel: string;
 
-    protected lastPageLabel: string;
+    lastPageLabel: string;
 
-    protected showCurrentPageNumberDisplay: boolean;
+    showCurrentPageNumberDisplay: boolean;
 
-    protected hiddenPageNumberInputBox: boolean;
+    hiddenPageNumberInputBox: boolean;
 
     private _totalPages: number;
 
@@ -163,11 +163,11 @@ export class PageBrowserComponent
         }
     }
 
-    protected isOnFrontPage(): boolean {
+    isOnFrontPage(): boolean {
         return this.currentPageNumber === 1;
     }
 
-    protected isOnLastPage(): boolean {
+    isOnLastPage(): boolean {
         return this.currentPageNumber === this._totalPages;
     }
 
@@ -184,7 +184,7 @@ export class PageBrowserComponent
         return this.currentPageNumber;
     }
 
-    protected getNextPage(): number {
+    getNextPage(): number {
         if (this.bondedPageNumber && this.bondedPageNumber > 0) {
             if (this.bondedPageNumber !== this.currentPageNumber
                 && this.bondedPageNumber > this.currentPageNumber) {
@@ -197,7 +197,7 @@ export class PageBrowserComponent
         return this.currentPageNumber;
     }
 
-    protected navigateTo(pageNumber: number) {
+    navigateTo(pageNumber: number) {
         const
             pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
@@ -222,28 +222,28 @@ export class PageBrowserComponent
 
     }
 
-    protected enablesCurrentPageNumberDisplay() {
+    enablesCurrentPageNumberDisplay() {
         if (this.enablePageNumberInputBox) {
             this.showCurrentPageNumberDisplay = true;
             this.hiddenPageNumberInputBox = true;
         }
     }
 
-    protected enablesPageNumberInputBox() {
+    enablesPageNumberInputBox() {
         if (this.enablePageNumberInputBox) {
             this.showCurrentPageNumberDisplay = false;
             this.hiddenPageNumberInputBox = false;
         }
     }
 
-    protected onMouseOver() {
+    onMouseOver() {
         const
             pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
         pageNumberInputBox.focus();
     }
 
-    protected resizePageNumberInputBoxWidth() {
+    resizePageNumberInputBoxWidth() {
         const pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
         const computedStyle = window.getComputedStyle(pageNumberInputBox);
@@ -257,21 +257,6 @@ export class PageBrowserComponent
 
         pageNumberInputBox.style.width = `${minimalWidth + (pageNumberInputBoxLength * this.widthGrowthToggleFactor)}px`;
     }
-
-    // resolvePageNumberInput(event: KeyboardEvent) {
-    //     // const
-    //     //    eventTarget: any = event.currentTarget;
-
-    //     // event.preventDefault();
-
-    //     // console.log(event.key);
-
-    //     // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] +
-    //     // event.key should be smaller than or equal to totalPages ver problema ao selecionar e digitar, porque está sendo concatenado ao
-    //     // invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso) eventTarget['value'] +=
-    //     // event.keyCode;
-    //     // this.resizePageNumberInputBoxWidth();
-    // }
 
     private reset() {
         this.currentPageNumber = 1;
@@ -321,6 +306,21 @@ export class PageBrowserComponent
             this.lastPageLabel = 'last';
         }
     }
+
+    // resolvePageNumberInput(event: KeyboardEvent) {
+    //     // const
+    //     //    eventTarget: any = event.currentTarget;
+
+    //     // event.preventDefault();
+
+    //     // console.log(event.key);
+
+    //     // to do that following a logic, as event.key should be a number (use regular expression to test it) and eventTarget['value'] +
+    //     // event.key should be smaller than or equal to totalPages ver problema ao selecionar e digitar, porque está sendo concatenado ao
+    //     // invés de substituir o que fora selecionado (ver como pegar o que fora selecionado para o caso) eventTarget['value'] +=
+    //     // event.keyCode;
+    //     // this.resizePageNumberInputBoxWidth();
+    // }
 
     // private setMaxInputValidationMessage(input: HTMLInputElement) {
     //     // input.setCustomValidity(`Este campo deve ter o valor máximo de: ${this.totalPages}`);
