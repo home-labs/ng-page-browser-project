@@ -140,7 +140,7 @@ Name|Description
 |@Input()<br/>enablePageNumberInputBox: boolean|Optional. A text box to insert the page number to jump to any page in the page range.|
 |@Input()<br/>queryParamPropertyName: string|Optional. Define the name of query param property.|
 |@Input()<br/>widthGrowthToggleFactor: number|Optional. A number that represents the growth factor of the page number input text box.|
-|@Output<br/>changePage: EventEmitter<number>| Callback function to inform what's the number of current page.|
+|@Output<br/>changePage: EventEmitter<number>|Optional. Callback function to inform what's the number of current page.|
 
 
 **Note.**: 
