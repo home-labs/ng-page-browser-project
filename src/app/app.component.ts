@@ -4,15 +4,15 @@ import {
     ViewChild
 } from '@angular/core';
 
-// import {
-//     PageBrowserComponent
-//     , NgPageBrowser
-// } from '@actjs.on/ng-page-browser';
-
 import {
     PageBrowserComponent
     , NgPageBrowser
-} from 'projects/ng-page-browser';
+} from '@actjs.on/ng-page-browser';
+
+// import {
+//     PageBrowserComponent
+//     , NgPageBrowser
+// } from 'projects/ng-page-browser';
 
 
 @Component({
