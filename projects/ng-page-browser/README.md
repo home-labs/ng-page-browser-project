@@ -36,12 +36,15 @@
 </code></pre>
 <p>So…</p>
 <pre class=" language-typescript"><code class="prism  language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span>
-    Component<span class="token punctuation">,</span>
-    OnInit<span class="token punctuation">,</span>
-    ViewChild
+    Component
+    <span class="token punctuation">,</span> OnInit<span class="token punctuation">,</span>
+    <span class="token punctuation">,</span> ViewChild
 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token punctuation">{</span> PageBrowserComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@actjs.on/ng-page-browser'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+    PageBrowserComponent
+    <span class="token punctuation">,</span> NgPageBrowser
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@actjs.on/ng-page-browser'</span><span class="token punctuation">;</span>
 
 
 @<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -51,49 +54,67 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
 
-    @<span class="token function">ViewChild</span><span class="token punctuation">(</span><span class="token string">'pageBrowser'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token keyword">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token keyword">private</span> pageBrowser<span class="token punctuation">:</span> PageBrowserComponent<span class="token punctuation">;</span>
+    @<span class="token function">ViewChild</span><span class="token punctuation">(</span><span class="token string">'pageBrowser'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token keyword">private</span> pageBrowser<span class="token punctuation">:</span> PageBrowserComponent<span class="token punctuation">;</span>
 
-    enablePageNumberInputBox<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> pageNumber<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
 
-    collection<span class="token punctuation">:</span> object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> limit<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
 
-    pageNumber<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> collectionPromise<span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span>object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
 
-    limit<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> enablePageNumberInputBox<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> collection<span class="token punctuation">:</span> object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> count<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
 
     <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>limit <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>enablePageNumberInputBox <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>collection <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>pageNumber <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>limit <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">const</span>
-            interval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span>
-                <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">this</span><span class="token punctuation">.</span>pageBrowser<span class="token punctuation">.</span>totalPages <span class="token operator">=</span> <span class="token number">1110</span><span class="token punctuation">;</span>
-                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>pageBrowser<span class="token punctuation">.</span>totalPages <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>limit<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                        <span class="token keyword">this</span><span class="token punctuation">.</span>collection<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-                            property1<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`property1 value </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
-                            <span class="token punctuation">,</span> property2<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`property2 value </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
-                        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-                    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'function called after an interval'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token function">clearInterval</span><span class="token punctuation">(</span>interval<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span>
-            <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
     <span class="token punctuation">}</span>
 
-    <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">async</span> <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
+        <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pageBrowser<span class="token punctuation">.</span>totalPages <span class="token operator">=</span> NgPageBrowser<span class="token punctuation">.</span>Pagination
+            <span class="token punctuation">.</span><span class="token function">calculatesTotalPages</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>count<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>limit<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
     <span class="token function">onChangePage</span><span class="token punctuation">(</span>pageNumber<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>pageNumber <span class="token operator">=</span> pageNumber<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-<span class="token punctuation">}</span>
+    <span class="token function">getPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Promise<span class="token operator">&lt;</span>object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>collectionPromise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>
+            <span class="token punctuation">(</span>accomplish<span class="token punctuation">:</span> <span class="token punctuation">(</span>collection<span class="token punctuation">:</span> object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
 
+                <span class="token keyword">const</span> interval <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>
+                    <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
+
+                        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>count<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                            <span class="token keyword">this</span><span class="token punctuation">.</span>collection<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                                property1<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`property1 value </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+                                <span class="token punctuation">,</span> property2<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`property2 value </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+                            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+
+                        <span class="token function">accomplish</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>collection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'function called after an interval'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token function">clearInterval</span><span class="token punctuation">(</span>interval<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1500</span>
+                <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>collectionPromise<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
 </code></pre>
 <p><strong>Note.</strong>:</p>
 <blockquote>
