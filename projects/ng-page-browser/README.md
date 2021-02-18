@@ -13,7 +13,7 @@
 
 Include the module into `imports` metadata key of `NgModule` decorator in your application, importing `NgPageBrowserModule` from `@actjs.on/ng-page-browser`, like that.
 
-```typescript
+```ts
 import { NgPageBrowserModule } from '@actjs.on/ng-page-browser';
 
 @NgModule({
@@ -30,12 +30,12 @@ export class MyModule() { }
 <lib-page-browser
   #pageBrowser
   [labelTranslations]="{
-    firstPage: 'First',
+    firstPage: 'first',
     previousPage: '«',
     nextPage: '»',
-    lastPage: 'Last'
+    lastPage: 'last'
   }"
-  [enablePageNumberInputBox]="true || false"
+  [enablePageNumberInputBox]="enablePageNumberInputBox"
   [queryParamPropertyName]="'page'"
   (changePage)="onChangePage($event)"
 ></lib-page-browser>
@@ -43,7 +43,7 @@ export class MyModule() { }
 
 So...
 
-```typescript
+```ts
 import {
     Component
     , OnInit,
@@ -126,8 +126,24 @@ export class AppComponent implements OnInit {
 }
 ```
 
+### Directives
+
+Selector: `lib-page-browser`
+Exported as:  `NgPageBrowser.PageBrowserComponent`
+
+#### Properties
+
+
+Name|Description
+--|--
+|@Input()<br/>labelTranslations: ILabelTranslationsProperties|Optional. A literal object to define control labels.|
+|@Input()<br/>enablePageNumberInputBox: boolean|Optional. A text box to insert the page number to jump to any page in the page range.|
+|@Input()<br/>queryParamPropertyName: string|Optional. Define the name of query param property.|
+|@Input()<br/>widthGrowthToggleFactor: number|Optional. A number that represents the growth factor of the page number input text box.|
+|@Output<br/>changePage: EventEmitter<number>|Optional. Callback function to inform what's the number of current page.|
+
+
 **Note.**: 
 >- don't use this component nested a HTML tag block with `*ngIf` directive if you is using an `Angular` last than 8 version, or it'll not work;
 >- `enablePageNumberInputBox` is optional, if you set it, you'll can browse to a specific page, just clicking on the page number box to enable the page number input box (text input type) and clicking in previous page button (if the page number is smaller than current) or next page button (if the page number is bigger than current). If you enable the page number input box you can set `widthGrowthToggleFactor` to define the width growth factor of the page number input box;
->- You can use the `getPagePer` pipe passing the page number and the limit to page inline a collection `(... | getPagePer:pageNumberVariable:limitVariable)`.
-
+>- You can use the `getPagePer` pipe passing the page number and the limit to page a collection `(... | getPagePer:pageNumberVariable:limitVariable)` inline.
