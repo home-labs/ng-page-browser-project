@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { PageBrowserComponent } from './page-browser/component';
 
-import { GetPagePerPipe } from './index';
+import { GetPagePerPipe } from './get-page-per/pipe';
 
 
 @NgModule({
