@@ -7,14 +7,14 @@
       <a
         class="first-page-nav"
         *ngIf="!isOnFrontPage()"
-        (click)="navigateTo(1)"
+        (click)="navigate2(1)"
       >
         {{ firstPageLabel }}
       </a>
       <a
         class="prev-page-nav"
         *ngIf="!isOnFrontPage() && totalPages > 2"
-        (click)="navigateTo(getPreviousPage())"
+        (click)="navigate2(getPreviousPage())"
       >
         {{ previousPageLabel }}
       </a>
@@ -48,14 +48,14 @@
       <a
         class="next-page-nav"
         *ngIf="!isOnLastPage() && totalPages > 2"
-        (click)="navigateTo(getNextPage())"
+        (click)="navigate2(getNextPage())"
       >
         {{ nextPageLabel }}
       </a>
       <a
         class="last-page-nav"
         *ngIf="!isOnLastPage()"
-        (click)="navigateTo(totalPages)"
+        (click)="navigate2(totalPages)"
       >
         {{ lastPageLabel }}
       </a>

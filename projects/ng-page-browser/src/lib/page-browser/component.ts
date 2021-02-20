@@ -21,18 +21,7 @@ import {
 
 import { Subscription } from 'rxjs';
 
-
-interface ILabelTranslationsProperties {
-
-    firstPage?: string | HTMLElement;
-
-    previousPage?: string | HTMLElement;
-
-    nextPage?: string | HTMLElement;
-
-    lastPage?: string | HTMLElement;
-
-}
+import { ILabelTranslationsProperties } from '../i-label-transtations-properties';
 
 
 @Component({
@@ -197,7 +186,7 @@ export class PageBrowserComponent
         return this.currentPageNumber;
     }
 
-    navigateTo(pageNumber: number) {
+    navigate2(pageNumber: number) {
         const
             pageNumberInputBox: HTMLInputElement = this.pageNumberInputBox.nativeElement;
 
