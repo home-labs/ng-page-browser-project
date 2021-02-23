@@ -20,8 +20,7 @@ export class AppComponent implements OnInit {
 
     enablePageNumberInputBox: boolean;
 
-    // collectionPromise!: Promise<object[]>;
-    collectionPromise!: Promise<any[]>;
+    collectionPromise!: Promise<object[]>;
 
     collection: object[];
 
@@ -39,17 +38,6 @@ export class AppComponent implements OnInit {
         this.pageNumber = 1;
 
         this.count = 1;
-
-        // this.collectionPromise = this.getPage();
-
-        // this.collectionPromise.then(
-        //         (value: object[]) => {
-        //             this.collection = value;
-        //         }
-        //     )
-        // ;
-
-        // this.getPage();
     }
 
     async ngOnInit() {

@@ -23,9 +23,9 @@ export class GetPagePerPipe implements PipeTransform {
 
         if (data) {
             if (this.pagination) {
-                this.pagination.setLimit(limit as number);
+                this.pagination.setLimit((limit)!);
             } else {
-                this.pagination = new Pagination(data, limit as number);
+                this.pagination = new Pagination(data, (limit)!);
             }
 
             page = this.pagination.getPage(pageNumber);

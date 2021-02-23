@@ -36,7 +36,7 @@ export class PageBrowserComponent
         AfterViewInit,
         OnDestroy {
 
-    @Input() labelTranslations: ILabelTranslationsProperties;
+    @Input() labelTranslations!: ILabelTranslationsProperties;
 
     @Input() enablePageNumberInputBox: boolean;
 
@@ -69,13 +69,13 @@ export class PageBrowserComponent
 
     maxlength: number;
 
-    firstPageLabel: string | HTMLElement;
+    firstPageLabel!: string | HTMLElement;
 
-    previousPageLabel: string | HTMLElement;
+    previousPageLabel!: string | HTMLElement;
 
-    nextPageLabel: string | HTMLElement;
+    nextPageLabel!: string | HTMLElement;
 
-    lastPageLabel: string | HTMLElement;
+    lastPageLabel!: string | HTMLElement;
 
     showCurrentPageNumberDisplay: boolean;
 
@@ -83,9 +83,9 @@ export class PageBrowserComponent
 
     private _totalPages: number;
 
-    private queryParamsSubscription: Subscription;
+    private queryParamsSubscription!: Subscription;
 
-    private pageNumberInputBox: ElementRef;
+    private pageNumberInputBox!: ElementRef;
     @ViewChild('pageNumberInputBox', { static: false })
     private set _pageNumberInputBox(value: any) {
         this.pageNumberInputBox = value;
@@ -113,16 +113,7 @@ export class PageBrowserComponent
         // relative to font size
         this.widthGrowthToggleFactor = 8.46;
         this.enablePageNumberInputBox = true;
-        this.labelTranslations = {};
         this.queryParamPropertyName = '';
-
-        this.firstPageLabel = '';
-        this.previousPageLabel = '';
-        this.nextPageLabel = '';
-        this.lastPageLabel = '';
-
-        this.queryParamsSubscription = null as any;
-        this.pageNumberInputBox = null as any;
     }
 
     // ngOnChanges(simpleChanges: SimpleChanges) {
@@ -276,26 +267,27 @@ export class PageBrowserComponent
     private resolveLabelTranslations() {
         if (Object.keys(this.labelTranslations).length) {
             if (this.labelTranslations.hasOwnProperty('firstPage')) {
-                this.firstPageLabel = this.labelTranslations.firstPage as any;
+                this.firstPageLabel = (this.labelTranslations.firstPage)!;
             } else {
                 this.firstPageLabel = 'first';
             }
 
             if (this.labelTranslations.hasOwnProperty('previousPage')) {
-                this.previousPageLabel = this
-                    .labelTranslations.previousPage as any;
+                this.previousPageLabel = (this
+                    .labelTranslations.previousPage)!;
             } else {
                 this.previousPageLabel = 'previous';
             }
 
             if (this.labelTranslations.hasOwnProperty('nextPage')) {
-                this.nextPageLabel = this.labelTranslations.nextPage as any;
+                this.nextPageLabel = (this.labelTranslations.nextPage)!;
             } else {
                 this.nextPageLabel = 'next';
             }
 
             if (this.labelTranslations.hasOwnProperty('lastPage')) {
-                this.lastPageLabel = this.labelTranslations.lastPage as any;
+                // this.lastPageLabel = (this.labelTranslations.lastPage)!;
+                this.lastPageLabel = (this.labelTranslations.lastPage)!;
             } else {
                 this.lastPageLabel = 'last';
             }
