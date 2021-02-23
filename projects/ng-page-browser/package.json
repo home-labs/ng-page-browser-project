@@ -1,11 +1,12 @@
 {
   "name": "@actjs.on/ng-page-browser",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "peerDependencies": {
-    "@angular/common": ">= 5"
-    , "@angular/core": ">= 5"
-    , "@angular/forms": ">= 5"
-    , "@angular/router": ">= 5"
-    , "rxjs": ">= 5"
+    "@angular/common": "^11.0.9",
+    "@angular/core": "^11.0.9",
+    "@actjs.on/mathrix-ts": "1.0.0-rc.3"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }

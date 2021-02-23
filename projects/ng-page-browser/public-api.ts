@@ -1,1 +1,1 @@
-export * from './src/ng-page-browser';
+export * from './src/index';

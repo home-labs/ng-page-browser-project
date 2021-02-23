@@ -4,15 +4,8 @@ import {
     ViewChild
 } from '@angular/core';
 
-import {
-    PageBrowserComponent
-    , NgPageBrowser
-} from '@actjs.on/ng-page-browser';
-
-// import {
-//     PageBrowserComponent
-//     , NgPageBrowser
-// } from 'projects/ng-page-browser';
+// import { NgPageBrowser } from '@actjs.on/ng-page-browser';
+import { NgPageBrowser } from 'projects/ng-page-browser/public-api';
 
 
 @Component({
@@ -22,17 +15,20 @@ import {
 })
 export class AppComponent implements OnInit {
 
-    @ViewChild('pageBrowser', { static: true }) private pageBrowser: PageBrowserComponent;
+    @ViewChild('pageBrowser', { static: true })
+    private pageBrowser!: NgPageBrowser.PageBrowserComponent;
 
-    protected pageNumber: number;
+    enablePageNumberInputBox: boolean;
 
-    protected limit: number;
+    // collectionPromise: Promise<any[]>;
+    collectionPromise: Promise<object[]> | undefined;
+    // collectionPromise: Promise<object[]>;
 
-    protected collectionPromise: Promise<object[]>;
+    collection: object[];
 
-    protected enablePageNumberInputBox: boolean;
+    limit: number;
 
-    private collection: object[];
+    pageNumber: number;
 
     private count: number;
 
@@ -40,6 +36,21 @@ export class AppComponent implements OnInit {
         this.limit = 5;
         this.enablePageNumberInputBox = true;
         this.collection = [];
+
+        this.pageNumber = 1;
+
+        this.count = 1;
+
+        // this.collectionPromise = this.getPage();
+
+        // this.collectionPromise.then(
+        //         (value: object[]) => {
+        //             this.collection = value;
+        //         }
+        //     )
+        // ;
+
+        this.getPage();
     }
 
     async ngOnInit() {
@@ -48,14 +59,25 @@ export class AppComponent implements OnInit {
 
         this.pageBrowser.totalPages = NgPageBrowser.Pagination
             .calculatesTotalPages(this.count, this.limit);
+
+        // this.defineInitialState();
     }
 
     // protected for now it doesn't work when building the lib
-    protected onChangePage(pageNumber: number) {
+    onChangePage(pageNumber: number) {
         this.pageNumber = pageNumber;
     }
 
+    private async defineInitialState() {
+        await this.getPage();
+
+        this.pageBrowser.totalPages = NgPageBrowser.Pagination
+            .calculatesTotalPages(this.count, this.limit);
+    }
+
     private getPage(): Promise<object[]> {
+        const collection: object[] = [];
+
         this.collectionPromise = new Promise(
             (accomplish: (collection: object[]) => void) => {
 
@@ -70,6 +92,7 @@ export class AppComponent implements OnInit {
                             });
                         }
 
+                        debugger
                         accomplish(this.collection);
 
                         console.log('function called after an interval');

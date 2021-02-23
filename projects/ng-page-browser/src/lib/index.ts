@@ -1,7 +1,5 @@
-export { GetPagePerPipe } from './get-page-per/pipe';
+export * from './pagination';
 
-export { PageBrowserComponent } from './page-browser/component';
+export * from './get-page-per/pipe';
 
-export { NgPageBrowserModule } from './module';
-
-export { Pagination } from './pagination';
+export * from './page-browser/component';

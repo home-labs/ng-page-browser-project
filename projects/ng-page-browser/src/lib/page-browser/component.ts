@@ -109,6 +109,20 @@ export class PageBrowserComponent
         this.currentPageNumber = 1;
         this.bondedPageNumber = 1;
         this.maxlength = 1;
+
+        // relative to font size
+        this.widthGrowthToggleFactor = 8.46;
+        this.enablePageNumberInputBox = true;
+        this.labelTranslations = {};
+        this.queryParamPropertyName = '';
+
+        this.firstPageLabel = '';
+        this.previousPageLabel = '';
+        this.nextPageLabel = '';
+        this.lastPageLabel = '';
+
+        this.queryParamsSubscription = null as any;
+        this.pageNumberInputBox = null as any;
     }
 
     // ngOnChanges(simpleChanges: SimpleChanges) {
@@ -129,14 +143,11 @@ export class PageBrowserComponent
     }
 
     ngOnInit() {
-        // relative to font size
-        this.widthGrowthToggleFactor = 8.46;
-        this.enablePageNumberInputBox = this.enablePageNumberInputBox || false;
-
         this.queryParamsSubscription = this.route.queryParams.subscribe(
             (params: object) => {
                 if (params.hasOwnProperty(this.queryParamPropertyName)) {
-                    this.currentPageNumber = parseInt(params[this.queryParamPropertyName], 10);
+                    this.currentPageNumber = parseInt((params as any)[this.queryParamPropertyName]
+                    , 10);
                     this.changePage.emit(this.currentPageNumber);
                 }
             }
@@ -257,7 +268,7 @@ export class PageBrowserComponent
         const
             statement: object = {};
 
-        statement[this.queryParamPropertyName] = pageNumber;
+        (statement as any)[this.queryParamPropertyName] = pageNumber;
 
         return statement;
     }
@@ -265,26 +276,26 @@ export class PageBrowserComponent
     private resolveLabelTranslations() {
         if (Object.keys(this.labelTranslations).length) {
             if (this.labelTranslations.hasOwnProperty('firstPage')) {
-                this.firstPageLabel = this.labelTranslations.firstPage;
+                this.firstPageLabel = this.labelTranslations.firstPage as any;
             } else {
                 this.firstPageLabel = 'first';
             }
 
             if (this.labelTranslations.hasOwnProperty('previousPage')) {
                 this.previousPageLabel = this
-                    .labelTranslations.previousPage;
+                    .labelTranslations.previousPage as any;
             } else {
                 this.previousPageLabel = 'previous';
             }
 
             if (this.labelTranslations.hasOwnProperty('nextPage')) {
-                this.nextPageLabel = this.labelTranslations.nextPage;
+                this.nextPageLabel = this.labelTranslations.nextPage as any;
             } else {
                 this.nextPageLabel = 'next';
             }
 
             if (this.labelTranslations.hasOwnProperty('lastPage')) {
-                this.lastPageLabel = this.labelTranslations.lastPage;
+                this.lastPageLabel = this.labelTranslations.lastPage as any;
             } else {
                 this.lastPageLabel = 'last';
             }

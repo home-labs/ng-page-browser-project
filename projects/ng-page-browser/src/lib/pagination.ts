@@ -19,6 +19,7 @@ export class Pagination<T> {
         this.limit = Pagination.resolvesLimit(this.count, limit);
         this.totalPages = Pagination.calculatesTotalPages(this.count, limit);
         this.page = [];
+        this.currentPageNumber = 1;
     }
 
     static calculatesTotalPages(count: number, limit?: number): number {

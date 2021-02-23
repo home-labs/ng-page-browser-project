@@ -140,7 +140,7 @@
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ng-web-compack/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ng-page-browser/tsconfig.lib.prod.json"
             }
           }
         },
@@ -167,5 +167,8 @@
       }
     }
   },
-  "defaultProject": "ng-page-browser-project"
+  "defaultProject": "ng-page-browser-project",
+  "cli": {
+    "analytics": "21534b08-aec1-4807-8d4a-575bd2d3133b"
+  }
 }
