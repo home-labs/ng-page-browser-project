@@ -286,7 +286,6 @@ export class PageBrowserComponent
             }
 
             if (this.labelTranslations.hasOwnProperty('lastPage')) {
-                // this.lastPageLabel = (this.labelTranslations.lastPage)!;
                 this.lastPageLabel = (this.labelTranslations.lastPage)!;
             } else {
                 this.lastPageLabel = 'last';
