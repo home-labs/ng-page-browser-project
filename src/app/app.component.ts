@@ -92,7 +92,6 @@ export class AppComponent implements OnInit {
                             });
                         }
 
-                        debugger
                         accomplish(this.collection);
 
                         console.log('function called after an interval');

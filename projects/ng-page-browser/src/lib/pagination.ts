@@ -80,11 +80,13 @@ export class Pagination<T> {
     }
 
     getPage(pageNumber: number): T[] {
+
         let offset: number;
 
         if (this.limit) {
-            if (!this.currentPageNumber
-                || pageNumber !== this.currentPageNumber) {
+            if ((this.collection.length && !this.page.length)
+                || (pageNumber !== this.currentPageNumber)]
+                ) {
                 this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
                 offset = Pagination.calculatesOffset(this.count, this.limit, this.currentPageNumber);
                 this.page = this.collection.slice(offset, offset + this.limit);
