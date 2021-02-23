@@ -4,7 +4,6 @@
   "peerDependencies": {
     "@angular/common": "^11.0.9",
     "@angular/core": "^11.0.9",
-    "@actjs.on/mathrix-ts": "1.0.0-rc.3"
   },
   "dependencies": {
     "tslib": "^2.0.0"
