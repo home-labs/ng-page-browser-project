@@ -85,7 +85,7 @@ export class Pagination<T> {
 
         if (this.limit) {
             if ((this.collection.length && !this.page.length)
-                || (pageNumber !== this.currentPageNumber)]
+                || (pageNumber !== this.currentPageNumber)
                 ) {
                 this.currentPageNumber = Pagination.resolvesPageNumber(pageNumber, this.totalPages);
                 offset = Pagination.calculatesOffset(this.count, this.limit, this.currentPageNumber);

@@ -7,8 +7,7 @@ import { Pagination } from '../pagination';
 
 
 @Pipe({
-    name: 'getPagePer',
-    pure: false
+    name: 'getPagePer'
 })
 export class GetPagePerPipe implements PipeTransform {
 

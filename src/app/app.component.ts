@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
 
     enablePageNumberInputBox: boolean;
 
-    collectionPromise!: Promise<object[]>;
+    // collectionPromise!: Promise<object[]>;
+    collectionPromise!: Promise<any[]>;
 
     collection: object[];
 
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
         //     )
         // ;
 
-        this.getPage();
+        // this.getPage();
     }
 
     async ngOnInit() {
@@ -57,20 +58,11 @@ export class AppComponent implements OnInit {
 
         this.pageBrowser.totalPages = NgPageBrowser.Pagination
             .calculatesTotalPages(this.count, this.limit);
-
-        // this.defineInitialState();
     }
 
     // protected for now it doesn't work when building the lib
     onChangePage(pageNumber: number) {
         this.pageNumber = pageNumber;
-    }
-
-    private async defineInitialState() {
-        await this.getPage();
-
-        this.pageBrowser.totalPages = NgPageBrowser.Pagination
-            .calculatesTotalPages(this.count, this.limit);
     }
 
     private getPage(): Promise<object[]> {
