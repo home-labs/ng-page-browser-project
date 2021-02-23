@@ -12,7 +12,7 @@ import { Pagination } from '../pagination';
 })
 export class GetPagePerPipe implements PipeTransform {
 
-    private pagination: Pagination<any> | undefined;
+    private pagination!: Pagination<any>;
 
     constructor() {
 

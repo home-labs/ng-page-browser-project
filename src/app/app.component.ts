@@ -20,9 +20,7 @@ export class AppComponent implements OnInit {
 
     enablePageNumberInputBox: boolean;
 
-    // collectionPromise: Promise<any[]>;
-    collectionPromise: Promise<object[]> | undefined;
-    // collectionPromise: Promise<object[]>;
+    collectionPromise!: Promise<object[]>;
 
     collection: object[];
 
