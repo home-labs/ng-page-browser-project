@@ -17,23 +17,23 @@ export class GetPagePerPipe implements PipeTransform {
 
     }
 
-    transform(data: any[], limit?: number, pageNumber: number = 1): any[] {
+    transform(collecttion: any[], limit?: number, pageNumber: number = 1): any[] {
 
         let page: any[];
 
-        if (data) {
-            if (this.pagination) {
-                this.pagination.setLimit((limit)!);
-            } else {
-                this.pagination = new Pagination(data, (limit)!);
-            }
-
-            page = this.pagination.getPage(pageNumber);
-
-            return page;
+        if (!collecttion.length) {
+            return collecttion;
         }
 
-        return [];
+        if (this.pagination) {
+            this.pagination.setLimit((limit)!);
+        } else {
+            this.pagination = new Pagination(collecttion, (limit)!);
+        }
+
+        page = this.pagination.getPage(pageNumber);
+
+        return page;
 
     }
 
