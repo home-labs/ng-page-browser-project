@@ -11,18 +11,18 @@ import { Pagination } from '../pagination';
 })
 export class GetPagePerPipe implements PipeTransform {
 
-    private pagination!: Pagination<any>;
+    private pagination!: Pagination<Object>;
 
     constructor() {
 
     }
 
-    transform(collecttion: any[], limit?: number, pageNumber: number = 1): any[] {
+    transform<T extends Object>(collecttion: T[], limit?: number, pageNumber: number = 1): T[] {
 
-        let page: any[];
+        let page: T[];
 
-        if (!collecttion.length) {
-            return collecttion;
+        if (!collecttion || !collecttion.length) {
+            return [];
         }
 
         if (this.pagination) {
@@ -31,7 +31,7 @@ export class GetPagePerPipe implements PipeTransform {
             this.pagination = new Pagination(collecttion, (limit)!);
         }
 
-        page = this.pagination.getPage(pageNumber);
+        page = this.pagination.getPage(pageNumber) as T[];
 
         return page;
 

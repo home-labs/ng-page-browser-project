@@ -4,8 +4,17 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { NgPageBrowser } from '@actjs.on/ng-page-browser';
-// import { NgPageBrowser } from 'projects/ng-page-browser/public-api';
+// import { NgPageBrowser } from '@actjs.on/ng-page-browser';
+import { NgPageBrowser } from 'projects/ng-page-browser/public-api';
+
+
+interface TestUser {
+
+    property1: string;
+
+    property2?: string;
+
+}
 
 
 @Component({
@@ -20,9 +29,7 @@ export class AppComponent implements OnInit {
 
     enablePageNumberInputBox: boolean;
 
-    collectionPromise!: Promise<object[]>;
-
-    collection: object[];
+    collectionPromise!: Promise<TestUser[]>;
 
     limit: number;
 
@@ -33,7 +40,6 @@ export class AppComponent implements OnInit {
     constructor() {
         this.limit = 5;
         this.enablePageNumberInputBox = true;
-        this.collection = [];
 
         this.pageNumber = 1;
 
@@ -53,24 +59,25 @@ export class AppComponent implements OnInit {
         this.pageNumber = pageNumber;
     }
 
-    private getPage(): Promise<object[]> {
-        const collection: object[] = [];
+    private getPage(): Promise<TestUser[]> {
+
+        const collection: TestUser[] = [];
 
         this.collectionPromise = new Promise(
-            (accomplish: (collection: object[]) => void) => {
+            (accomplish: (collection: TestUser[]) => void) => {
 
                 const interval = setTimeout(
                     () => {
                         this.count = 10000;
 
                         for (let i = 1; i <= this.count; i++) {
-                            this.collection.push({
+                            collection.push({
                                 property1: `property1 value ${i}`
                                 , property2: `property2 value ${i}`
                             });
                         }
 
-                        accomplish(this.collection);
+                        accomplish(collection);
 
                         console.log('function called after an interval');
                         clearInterval(interval);

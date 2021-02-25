@@ -1,9 +1,9 @@
 {
   "name": "@actjs.on/ng-page-browser",
-  "version": "1.0.0-rc.4",
+  "version": "1.0.0-rc.5",
   "peerDependencies": {
     "@angular/common": "^11.0.9",
-    "@angular/core": "^11.0.9",
+    "@angular/core": "^11.0.9"
   },
   "dependencies": {
     "tslib": "^2.0.0"
