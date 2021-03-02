@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,8 @@ import { GetPagePerPipe } from './get-page-per/pipe';
 
 @NgModule({
     imports: [
-        CommonModule
+        BrowserModule
+        , CommonModule
         , FormsModule
         , RouterModule.forRoot([])
     ],
@@ -19,7 +21,8 @@ import { GetPagePerPipe } from './get-page-per/pipe';
         , GetPagePerPipe
     ],
     exports: [
-        PageBrowserComponent
+        CommonModule
+        , PageBrowserComponent
         , GetPagePerPipe
     ]
 })

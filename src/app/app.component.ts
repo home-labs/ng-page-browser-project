@@ -4,8 +4,8 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { NgPageBrowser } from '@actjs.on/ng-page-browser';
-// import { NgPageBrowser } from 'projects/ng-page-browser/public-api';
+// import { NgPageBrowser } from '@actjs.on/ng-page-browser';
+import { NgPageBrowser } from 'projects/ng-page-browser/public-api';
 
 
 interface TestUser {
